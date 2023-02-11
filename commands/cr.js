@@ -123,7 +123,7 @@ module.exports = {
                     .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
                     .setThumbnail(CR_THUMBNAIL)
                     .addFields(
-                        generateField('Arena', ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].name),
+                        generateField('Arena', `${player.arena ? player.arena.name : 'Arena 0'}\n${ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].name}`),
                         generateField('Clan', player.clan ? `${player.clan.name}\n${player.clan.tag}` : 'None'),
                         generateField('\u200B', '\u200B', false, { highlight: false }),
                         generateField('Trophies', player.trophies),
