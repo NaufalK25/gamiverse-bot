@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, humanizeDate, nodeFetch } = require('../helpers');
+const { addField, createErrorEmbed, humanizeDate, nodeFetch } = require('../helpers');
 
 const CHESS_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676176840/gamiverse/chess/chess_xopl8k.png';
 
@@ -46,20 +46,13 @@ module.exports = {
 
             interaction.reply({ embeds: [embed] });
         } catch (err) {
-            const embed = new EmbedBuilder()
-                .setColor('#FFCCCC')
-                .setTitle('Error')
-                .setThumbnail(CHESS_THUMBNAIL)
-                .setDescription(
-                    [
-                        'This error can be caused by:',
-                        '1. Rate limit exceeded',
-                        '2. Internal server error',
-                        '3. Server is under maintenance',
-                        'Please contact the developer if the error persists.'
-                    ].join('\n')
-                )
-                .setFooter({ text: 'Chess.com' });
+            const embed = createErrorEmbed(
+                CHESS_THUMBNAIL,
+                ['This error can be caused by:', '1. Rate limit exceeded', '2. Internal server error', '3. Server is under maintenance', 'Please contact the developer if the error persists.'].join(
+                    '\n'
+                ),
+                'Chess.com'
+            );
 
             interaction.reply({ embeds: [embed] });
         }

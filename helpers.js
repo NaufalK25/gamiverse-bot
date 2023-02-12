@@ -1,8 +1,14 @@
+const { EmbedBuilder } = require('discord.js');
+
 const addField = (name, value, inline = true, option = { highlight: true }) => ({
     name,
     value: option.highlight ? `\`${value}\`` : `${value}`,
     inline
 });
+
+const createErrorEmbed = (thumbnail, desc, footerText) => {
+    return new EmbedBuilder().setColor('#FFCCCC').setTitle('Error').setThumbnail(thumbnail).setDescription(desc).setFooter({ text: footerText });
+};
 
 const humanizeDate = unixTimestamp => {
     const date = new Date(unixTimestamp * 1000);
@@ -42,6 +48,7 @@ const nodeFetch = async (url, init = {}) => {
 
 module.exports = {
     addField,
+    createErrorEmbed,
     humanizeDate,
     nodeFetch
 };

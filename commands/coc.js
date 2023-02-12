@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, nodeFetch } = require('../helpers');
+const { addField, createErrorEmbed, nodeFetch } = require('../helpers');
 
 const COC_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676100894/gamiverse/coc/coc_jhd8vb.png';
 const TOWN_HALL_IMAGES = {
@@ -70,24 +70,18 @@ module.exports = {
             });
 
             if (player.reason === 'notFound') {
-                const embed = new EmbedBuilder()
-                    .setColor('#FFCCCC')
-                    .setTitle('Error')
-                    .setThumbnail(COC_THUMBNAIL)
-                    .setDescription(`Player with tag \`#${argTag}\` doesn't exist`)
-                    .setFooter({ text: 'Clash of Clans' });
-
+                const embed = createErrorEmbed(COC_THUMBNAIL, `Player with tag \`#${argTag}\` doesn't exist`, 'Clash of Clans');
                 return interaction.reply({ embeds: [embed] });
             }
 
             if (player.reason === 'accessDenied.invalidIp') {
-                const embed = new EmbedBuilder()
-                    .setColor('#FFCCCC')
-                    .setTitle('Error')
-                    .setThumbnail(BS_THUMBNAIL)
-                    .setDescription(`Invalid IP Adress: ${player.message}`)
-                    .setFooter({ text: 'Brawl Stars' });
+                const invalidIP = player.message.split(' ').at(-1);
+                const embed = createErrorEmbed(COC_THUMBNAIL, `Invalid IP Adress: \`${invalidIP}\``, 'Clash of Clans');
+                return interaction.reply({ embeds: [embed] });
+            }
 
+            if (player.reason) {
+                const embed = createErrorEmbed(COC_THUMBNAIL, `Unknown error: \`${player.message}\``, 'Clash of Clans');
                 return interaction.reply({ embeds: [embed] });
             }
 
@@ -108,22 +102,19 @@ module.exports = {
 
             interaction.reply({ embeds: [embed] });
         } catch (err) {
-            const embed = new EmbedBuilder()
-                .setColor('#FFCCCC')
-                .setTitle('Error')
-                .setThumbnail(COC_THUMBNAIL)
-                .setDescription(
-                    [
-                        'This error can be caused by:',
-                        '1. API token expired',
-                        '2. Invalid API token',
-                        '3. Rate limit exceeded',
-                        '4. Internal server error',
-                        '5. Server is under maintenance',
-                        'Please contact the developer if the error persists.'
-                    ].join('\n')
-                )
-                .setFooter({ text: 'Clash of Clans' });
+            const embed = createErrorEmbed(
+                COC_THUMBNAIL,
+                [
+                    'This error can be caused by:',
+                    '1. API token expired',
+                    '2. Invalid API token',
+                    '3. Rate limit exceeded',
+                    '4. Internal server error',
+                    '5. Server is under maintenance',
+                    'Please contact the developer if the error persists.'
+                ].join('\n'),
+                'Clash of Clans'
+            );
 
             interaction.reply({ embeds: [embed] });
         }
