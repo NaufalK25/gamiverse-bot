@@ -80,6 +80,17 @@ module.exports = {
                 return interaction.reply({ embeds: [embed] });
             }
 
+            if (player.reason === 'accessDenied.invalidIp') {
+                const embed = new EmbedBuilder()
+                    .setColor('#FFCCCC')
+                    .setTitle('Error')
+                    .setThumbnail(BS_THUMBNAIL)
+                    .setDescription(`Invalid IP Adress: ${player.message}`)
+                    .setFooter({ text: 'Brawl Stars' });
+
+                return interaction.reply({ embeds: [embed] });
+            }
+
             const embed = new EmbedBuilder()
                 .setColor('#FFF85C')
                 .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
