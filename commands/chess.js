@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, humanizeDate } = require('../helpers');
+const { addField, humanizeDate, nodeFetch } = require('../helpers');
 
 const CHESS_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676176840/gamiverse/chess/chess_xopl8k.png';
 
@@ -12,8 +12,7 @@ module.exports = {
     async execute(interaction) {
         try {
             const argUsername = interaction.options.getString('username').trim().toLowerCase();
-            const res = await fetch(`https://api.chess.com/pub/player/${argUsername}`);
-            const player = await res.json();
+            const player = await nodeFetch(`https://api.chess.com/pub/player/${argUsername}`);
 
             if (player.code === 0) {
                 const embed = new EmbedBuilder()
@@ -26,8 +25,7 @@ module.exports = {
                 return interaction.reply({ embeds: [embed] });
             }
 
-            const countryRes = await fetch(player.country);
-            const country = await countryRes.json();
+            const country = await nodeFetch(player.country);
 
             const embed = new EmbedBuilder()
                 .setColor('#779556')

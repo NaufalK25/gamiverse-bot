@@ -1,6 +1,6 @@
 # Gamiverse
 
-Gamiverse is a discord bot that can fetch player stats from various games and display them in a simple and easy to read format.
+Gamiverse is a discord bot that can get player stats from various games and display them in a simple and easy to read format.
 
 Game support is currently limited to:
 

@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField } = require('../helpers');
+const { addField, nodeFetch } = require('../helpers');
 
 const BS_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676125350/gamiverse/bs/bs_huba5c.png';
 
@@ -12,14 +12,13 @@ module.exports = {
     async execute(interaction) {
         try {
             const argTag = interaction.options.getString('tag').trim().toUpperCase();
-            const res = await fetch(`https://api.brawlstars.com/v1/players/%23${argTag}`, {
+            const player = await nodeFetch(`https://api.brawlstars.com/v1/players/%23${argTag}`, {
                 method: 'GET',
                 headers: {
                     Accept: 'application/json',
                     Authorization: `Bearer ${process.env.BS_TOKEN}`
                 }
             });
-            const player = await res.json();
 
             if (player.reason === 'notFound') {
                 const embed = new EmbedBuilder()
