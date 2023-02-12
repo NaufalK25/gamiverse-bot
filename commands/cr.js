@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { generateField } = require('../helpers');
+const { addField } = require('../helpers');
 
 const CR_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676111869/gamiverse/cr/cr_nltoty.png';
 const ARENA_IMAGES = {
@@ -96,63 +96,62 @@ module.exports = {
         .setDescription('Get the player profile from Clash Royale')
         .addStringOption(option => option.setName('tag').setDescription('The player tag (without #)').setRequired(true)),
     async execute(interaction) {
-        const argTag = interaction.options.getString('tag').toUpperCase();
-
-        fetch(`https://api.clashroyale.com/v1/players/%23${argTag}`, {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                Authorization: `Bearer ${process.env.CR_TOKEN}`
-            }
-        })
-            .then(response => response.json())
-            .then(player => {
-                if (player.reason === 'notFound') {
-                    const embed = new EmbedBuilder()
-                        .setColor('#FFCCCC')
-                        .setTitle('Error')
-                        .setThumbnail(CR_THUMBNAIL)
-                        .setDescription(`Player with tag \`#${argTag}\` doesn't exist`)
-                        .setFooter({ text: 'Clash Royale' });
-
-                    return interaction.reply({ embeds: [embed] });
+        try {
+            const argTag = interaction.options.getString('tag').trim().toUpperCase();
+            const res = await fetch(`https://api.clashroyale.com/v1/players/%23${argTag}`, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: `Bearer ${process.env.CR_TOKEN}`
                 }
+            });
+            const player = await res.json();
 
-                const embed = new EmbedBuilder()
-                    .setColor('#54E2D6')
-                    .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
-                    .setThumbnail(CR_THUMBNAIL)
-                    .addFields(
-                        generateField('Arena', `${player.arena ? player.arena.name : 'Arena 0'}\n${ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].name}`),
-                        generateField('Clan', player.clan ? `${player.clan.name}\n${player.clan.tag}` : 'None'),
-                        generateField('\u200B', '\u200B', false, { highlight: false }),
-                        generateField('Trophies', player.trophies),
-                        generateField('Total Donation', player.totalDonations)
-                    )
-                    .setImage(ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].image)
-                    .setFooter({ text: 'Clash Royale' });
-
-                interaction.reply({ embeds: [embed] });
-            })
-            .catch(error => {
+            if (player.reason === 'notFound') {
                 const embed = new EmbedBuilder()
                     .setColor('#FFCCCC')
                     .setTitle('Error')
                     .setThumbnail(CR_THUMBNAIL)
-                    .setDescription(
-                        [
-                            'This error can be caused by:',
-                            '1. API token expired',
-                            '2. Invalid API token',
-                            '3. Rate limit exceeded',
-                            '4. Internal server error',
-                            '5. Server is under maintenance',
-                            'Please contact the developer if the error persists.'
-                        ].join('\n')
-                    )
+                    .setDescription(`Player with tag \`#${argTag}\` doesn't exist`)
                     .setFooter({ text: 'Clash Royale' });
 
-                interaction.reply({ embeds: [embed] });
-            });
+                return interaction.reply({ embeds: [embed] });
+            }
+
+            const embed = new EmbedBuilder()
+                .setColor('#54E2D6')
+                .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
+                .setThumbnail(CR_THUMBNAIL)
+                .addFields(
+                    addField('Arena', `${player.arena ? player.arena.name : 'Arena 0'}\n${ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].name}`),
+                    addField('Clan', player.clan ? `${player.clan.name}\n${player.clan.tag}` : 'None'),
+                    addField('\u200B', '\u200B', false, { highlight: false }),
+                    addField('Trophies', player.trophies),
+                    addField('Total Donation', player.totalDonations)
+                )
+                .setImage(ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].image)
+                .setFooter({ text: 'Clash Royale' });
+
+            interaction.reply({ embeds: [embed] });
+        } catch (err) {
+            const embed = new EmbedBuilder()
+                .setColor('#FFCCCC')
+                .setTitle('Error')
+                .setThumbnail(CR_THUMBNAIL)
+                .setDescription(
+                    [
+                        'This error can be caused by:',
+                        '1. API token expired',
+                        '2. Invalid API token',
+                        '3. Rate limit exceeded',
+                        '4. Internal server error',
+                        '5. Server is under maintenance',
+                        'Please contact the developer if the error persists.'
+                    ].join('\n')
+                )
+                .setFooter({ text: 'Clash Royale' });
+
+            interaction.reply({ embeds: [embed] });
+        }
     }
 };
