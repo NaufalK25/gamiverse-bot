@@ -6,6 +6,12 @@ const addField = (name, value, inline = true, option = { highlight: true }) => (
     inline
 });
 
+const addEmptyField = (inline = false) => ({
+    name: '\u200B',
+    value: '\u200B',
+    inline
+});
+
 const createErrorEmbed = (thumbnail, desc, footerText) => {
     return new EmbedBuilder().setColor('#FFCCCC').setTitle('Error').setThumbnail(thumbnail).setDescription(desc).setFooter({ text: footerText });
 };
@@ -48,6 +54,7 @@ const nodeFetch = async (url, init = {}) => {
 
 module.exports = {
     addField,
+    addEmptyField,
     createErrorEmbed,
     humanizeDate,
     nodeFetch

@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, createErrorEmbed, humanizeDate, nodeFetch } = require('../helpers');
+const { addField, addEmptyField, createErrorEmbed, humanizeDate, nodeFetch } = require('../helpers');
 
 const CHESS_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676176840/gamiverse/chess/chess_xopl8k.png';
 
@@ -15,13 +15,7 @@ module.exports = {
             const player = await nodeFetch(`https://api.chess.com/pub/player/${argUsername}`);
 
             if (player.code === 0) {
-                const embed = new EmbedBuilder()
-                    .setColor('#FFCCCC')
-                    .setTitle('Error')
-                    .setThumbnail(CHESS_THUMBNAIL)
-                    .setDescription(`Player with username \`${argUsername}\` doesn't exist`)
-                    .setFooter({ text: 'Chess.com' });
-
+                const embed = createErrorEmbed(CHESS_THUMBNAIL, `Player with username \`${argUsername}\` doesn't exist`, 'Chess.com');
                 return interaction.reply({ embeds: [embed] });
             }
 
@@ -35,10 +29,10 @@ module.exports = {
                 .addFields(
                     addField('Followers', player.followers),
                     addField('Country', country.name || 'None'),
-                    addField('\u200B', '\u200B', false, { highlight: false }),
+                    addEmptyField(),
                     addField('Status', player.status),
                     addField('League', player.league || 'None'),
-                    addField('\u200B', '\u200B', false, { highlight: false }),
+                    addEmptyField(),
                     addField('Last Online', humanizeDate(player.last_online)),
                     addField('Member Since', humanizeDate(player.joined))
                 )

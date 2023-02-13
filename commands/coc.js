@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, createErrorEmbed, nodeFetch } = require('../helpers');
+const { addField, addEmptyField, createErrorEmbed, nodeFetch } = require('../helpers');
 
 const COC_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676100894/gamiverse/coc/coc_jhd8vb.png';
 const TOWN_HALL_IMAGES = {
@@ -92,7 +92,7 @@ module.exports = {
                 .addFields(
                     addField('Town Hall', player.townHallLevel),
                     addField('Clan', player.clan ? `${player.clan.name}\n${player.clan.tag}` : 'None'),
-                    addField('\u200B', '\u200B', false, { highlight: false }),
+                    addEmptyField(),
                     addField('League', player.league ? player.league.name : 'None'),
                     addField('Trophies', player.trophies),
                     addField('War Stars', player.warStars)

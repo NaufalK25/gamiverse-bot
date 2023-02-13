@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, createErrorEmbed, nodeFetch } = require('../helpers');
+const { addField, addEmptyField, createErrorEmbed, nodeFetch } = require('../helpers');
 
 const BS_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676125350/gamiverse/bs/bs_huba5c.png';
 
@@ -40,12 +40,31 @@ module.exports = {
                 .setColor('#F5C04A')
                 .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
                 .setThumbnail(BS_THUMBNAIL)
-                .addFields(addField('Solo Victories', player.soloVictories), addField('Duo Victories', player.duoVictories), addField('3v3 Victories', player['3vs3Victories']), addField('\u200B', '\u200B', false, { highlight: false }), addField('Trophies', player.trophies), addField('Highest Trophies', player.highestTrophies))
+                .addFields(
+                    addField('Solo Victories', player.soloVictories),
+                    addField('Duo Victories', player.duoVictories),
+                    addField('3v3 Victories', player['3vs3Victories']),
+                    addEmptyField(),
+                    addField('Trophies', player.trophies),
+                    addField('Highest Trophies', player.highestTrophies)
+                )
                 .setFooter({ text: 'Brawl Stars' });
 
             interaction.reply({ embeds: [embed] });
         } catch (err) {
-            const embed = createErrorEmbed(BS_THUMBNAIL, ['This error can be caused by:', '1. API token expired', '2. Invalid API token', '3. Rate limit exceeded', '4. Internal server error', '5. Server is under maintenance', 'Please contact the developer if the error persists.'].join('\n'), 'Brawl Stars');
+            const embed = createErrorEmbed(
+                BS_THUMBNAIL,
+                [
+                    'This error can be caused by:',
+                    '1. API token expired',
+                    '2. Invalid API token',
+                    '3. Rate limit exceeded',
+                    '4. Internal server error',
+                    '5. Server is under maintenance',
+                    'Please contact the developer if the error persists.'
+                ].join('\n'),
+                'Brawl Stars'
+            );
 
             interaction.reply({ embeds: [embed] });
         }

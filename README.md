@@ -8,6 +8,7 @@ Game support is currently limited to:
 2. [Clash Royale](https://clashroyale.com/)
 3. [Brawl Stars](https://brawlstars.com/)
 4. [Chess.com](https://www.chess.com/)
+5. [PUBG](https://na.battlegrounds.pubg.com/)
 
 ## Commands
 
@@ -15,3 +16,4 @@ Game support is currently limited to:
 2. `/cr <player tag>` - Get Clash Royale player profile
 3. `/bs <player tag>` - Get Brawl Stars player profile
 4. `/chess <player username>` - Get Chess.com player profile
+5. `/pubg <platform> <account id>` - Get PUBG player profile

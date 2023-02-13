@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, createErrorEmbed, nodeFetch } = require('../helpers');
+const { addField, addEmptyField, createErrorEmbed, nodeFetch } = require('../helpers');
 
 const CR_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676111869/gamiverse/cr/cr_nltoty.png';
 const ARENA_IMAGES = {
@@ -129,7 +129,7 @@ module.exports = {
                 .addFields(
                     addField('Arena', `${player.arena ? player.arena.name : 'Arena 0'}\n${ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].name}`),
                     addField('Clan', player.clan ? `${player.clan.name}\n${player.clan.tag}` : 'None'),
-                    addField('\u200B', '\u200B', false, { highlight: false }),
+                    addEmptyField(),
                     addField('Trophies', player.trophies),
                     addField('Total Donation', player.totalDonations)
                 )
