@@ -7,7 +7,7 @@ const BS_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676125
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('bs')
-        .setDescription('Get the player profile from Brawl Stars')
+        .setDescription('Get player stats from Brawl Stars')
         .addStringOption(option => option.setName('tag').setDescription('The player tag (without #)').setRequired(true)),
     async execute(interaction) {
         try {

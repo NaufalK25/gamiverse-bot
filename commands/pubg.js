@@ -7,7 +7,7 @@ const PUBG_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v16762
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('pubg')
-        .setDescription('Get the player profile from PUBG')
+        .setDescription('Get player stats from PUBG')
         .addStringOption(option =>
             option
                 .setName('platform')

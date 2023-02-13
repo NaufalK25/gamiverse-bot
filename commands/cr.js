@@ -93,7 +93,7 @@ const ARENA_IMAGES = {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('cr')
-        .setDescription('Get the player profile from Clash Royale')
+        .setDescription('Get player stats from Clash Royale')
         .addStringOption(option => option.setName('tag').setDescription('The player tag (without #)').setRequired(true)),
     async execute(interaction) {
         try {

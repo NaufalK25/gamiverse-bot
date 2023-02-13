@@ -7,7 +7,7 @@ const CHESS_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('chess')
-        .setDescription('Get the player profile from Chess.com')
+        .setDescription('Get player stats from Chess.com')
         .addStringOption(option => option.setName('username').setDescription('The username of the player').setRequired(true)),
     async execute(interaction) {
         try {

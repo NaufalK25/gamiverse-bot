@@ -26,7 +26,7 @@ const RANK_IMAGES = {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('tetrio')
-        .setDescription('Get the player profile from TETR.io')
+        .setDescription('Get player stats from TETR.io')
         .addStringOption(option => option.setName('username').setDescription('The username of the player').setRequired(true)),
     async execute(interaction) {
         try {

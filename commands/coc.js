@@ -56,7 +56,7 @@ const getTHImage = (thLevel, thWeaponLevel) => {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('coc')
-        .setDescription('Get the player profile from Clash of Clans')
+        .setDescription('Get player stats from Clash of Clans')
         .addStringOption(option => option.setName('tag').setDescription('The player tag (without #)').setRequired(true)),
     async execute(interaction) {
         try {
