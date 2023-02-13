@@ -127,11 +127,35 @@ module.exports = {
                 .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
                 .setThumbnail(CR_THUMBNAIL)
                 .addFields(
-                    addField('Arena', `${player.arena ? player.arena.name : 'Arena 0'}\n${ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].name}`),
-                    addField('Clan', player.clan ? `${player.clan.name}\n${player.clan.tag}` : 'None'),
+                    addField('Arena', `${player.arena ? player.arena.name : 'Arena 0'} ${ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].name}`, {
+                        sticker: ':classical_building:'
+                    }),
+                    addField('Clan', player.clan ? `${player.clan.name} ${player.clan.tag}` : 'None', {
+                        sticker: ':shield:'
+                    }),
                     addEmptyField(),
-                    addField('Trophies', player.trophies),
-                    addField('Total Donation', player.totalDonations)
+                    addField('Total Donation', player.totalDonations, {
+                        sticker: ':gift:'
+                    }),
+                    addField('Trophies', player.trophies, {
+                        sticker: ':trophy:'
+                    }),
+                    addField('Highest Trophies', player.bestTrophies, {
+                        sticker: ':trophy:'
+                    }),
+                    addEmptyField(),
+                    addField('Wins', player.wins, {
+                        sticker: ':crossed_swords:'
+                    }),
+                    addField('Losses', player.losses, {
+                        sticker: ':x:'
+                    }),
+                    addField('Battle Count', player.battleCount, {
+                        sticker: ':crossed_swords:'
+                    }),
+                    addField('Three Crown Wins', player.threeCrownWins, {
+                        sticker: ':crown:'
+                    })
                 )
                 .setImage(ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].image)
                 .setFooter({ text: 'Clash Royale' });

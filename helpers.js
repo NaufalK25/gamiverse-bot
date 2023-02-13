@@ -1,24 +1,36 @@
 const { EmbedBuilder } = require('discord.js');
 
-const addField = (name, value, inline = true, option = { highlight: true }) => ({
-    name,
-    value: option.highlight ? `\`${value}\`` : `${value}`,
-    inline
-});
+const addField = (name, value, option = { inline: true, highlight: true, sticker: null }) => {
+    let { inline, highlight, sticker } = option;
+    if (inline === undefined) inline = true;
+    if (highlight === undefined) highlight = true;
 
-const addEmptyField = (inline = false) => ({
-    name: '\u200B',
-    value: '\u200B',
-    inline
-});
+    value = highlight ? `\`${value}\`` : `${value}`;
+
+    if (sticker) {
+        value = `${sticker} ${value}`;
+    }
+
+    return {
+        name,
+        value,
+        inline
+    };
+};
+
+const addEmptyField = () => {
+    return addField('\u200B', '\u200B', { inline: false, highlight: false });
+};
+
+addTitleOnlyField = title => {
+    return addField(title, '\u200B', { inline: false, highlight: false });
+};
 
 const createErrorEmbed = (thumbnail, desc, footerText) => {
     return new EmbedBuilder().setColor('#FFCCCC').setTitle('Error').setThumbnail(thumbnail).setDescription(desc).setFooter({ text: footerText });
 };
 
-const humanizeDate = unixTimestamp => {
-    const date = new Date(unixTimestamp * 1000);
-
+const humanizeDate = date => {
     const currentDate = new Date();
     const diffInMilliseconds = currentDate - date;
     const diffInSeconds = diffInMilliseconds / 1000;
@@ -55,6 +67,7 @@ const nodeFetch = async (url, init = {}) => {
 module.exports = {
     addField,
     addEmptyField,
+    addTitleOnlyField,
     createErrorEmbed,
     humanizeDate,
     nodeFetch

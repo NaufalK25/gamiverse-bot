@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, addEmptyField, createErrorEmbed, nodeFetch } = require('../helpers');
+const { addField, addEmptyField, addTitleOnlyField, createErrorEmbed, nodeFetch } = require('../helpers');
 
 const PUBG_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676216030/gamiverse/pubg/pubg_djuxe9.png';
 
@@ -51,29 +51,60 @@ module.exports = {
                 .setTitle(`${player.data.attributes.name} | ${player.data.attributes.shardId}`)
                 .setDescription(player.data.id)
                 .addFields(
-                    addField('Best Rank Point', stats.data.attributes.bestRankPoint),
+                    addField('Best Rank Point', stats.data.attributes.bestRankPoint, {
+                        sticker: ':medal:'
+                    }),
                     addEmptyField(),
-                    addField('Solo', '\u200B', false, { highlight: false }),
-                    addField('Top 10s', solo.top10s),
-                    addField('Wins', solo.wins),
-                    addField('Losses', solo.losses),
-                    addField('Kills', solo.kills),
-                    addField('Assists', solo.assists),
+                    addTitleOnlyField('Solo'),
+                    addField('Top 10s', solo.top10s, {
+                        sticker: ':first_place:'
+                    }),
+                    addField('Wins', solo.wins, {
+                        sticker: ':trophy:'
+                    }),
+                    addField('Losses', solo.losses, {
+                        sticker: ':x:'
+                    }),
+                    addField('Kills', solo.kills, {
+                        sticker: ':gun:'
+                    }),
+                    addField('Assists', solo.assists, {
+                        sticker: ':handshake:'
+                    }),
                     addEmptyField(),
-                    addField('Duo', '\u200B', false, { highlight: false }),
-                    addField('Top 10s', duo.top10s),
-                    addField('Wins', duo.wins),
-                    addField('Losses', duo.losses),
-                    addField('Kills', duo.kills),
-                    addField('Assists', duo.assists),
+                    addTitleOnlyField('Duo'),
+                    addField('Top 10s', duo.top10s, {
+                        sticker: ':first_place:'
+                    }),
+                    addField('Wins', duo.wins, {
+                        sticker: ':trophy:'
+                    }),
+                    addField('Losses', duo.losses, {
+                        sticker: ':x:'
+                    }),
+                    addField('Kills', duo.kills, {
+                        sticker: ':gun:'
+                    }),
+                    addField('Assists', duo.assists, {
+                        sticker: ':handshake:'
+                    }),
                     addEmptyField(),
-                    addField('Squad', '\u200B', false, { highlight: false }),
-                    addField('Top 10s', squad.top10s),
-                    addField('Wins', squad.wins),
-                    addField('Losses', squad.losses),
-                    addField('Kills', squad.kills),
-                    addField('Assists', squad.assists),
-                    addEmptyField()
+                    addTitleOnlyField('Squad'),
+                    addField('Top 10s', squad.top10s, {
+                        sticker: ':first_place:'
+                    }),
+                    addField('Wins', squad.wins, {
+                        sticker: ':trophy:'
+                    }),
+                    addField('Losses', squad.losses, {
+                        sticker: ':x:'
+                    }),
+                    addField('Kills', squad.kills, {
+                        sticker: ':gun:'
+                    }),
+                    addField('Assists', squad.assists, {
+                        sticker: ':handshake:'
+                    })
                 )
                 .setThumbnail(PUBG_THUMBNAIL)
                 .setFooter({ text: 'PUBG' });

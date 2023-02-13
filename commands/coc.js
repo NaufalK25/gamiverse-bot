@@ -90,12 +90,35 @@ module.exports = {
                 .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
                 .setThumbnail(COC_THUMBNAIL)
                 .addFields(
-                    addField('Town Hall', player.townHallLevel),
-                    addField('Clan', player.clan ? `${player.clan.name}\n${player.clan.tag}` : 'None'),
+                    addField('Town Hall', player.townHallLevel, {
+                        sticker: ':house_with_garden:'
+                    }),
+                    addField('Clan', player.clan ? `${player.clan.name} ${player.clan.tag}` : 'None', {
+                        sticker: ':shield:'
+                    }),
                     addEmptyField(),
-                    addField('League', player.league ? player.league.name : 'None'),
-                    addField('Trophies', player.trophies),
-                    addField('War Stars', player.warStars)
+                    addField('League', player.league ? player.league.name : 'None', {
+                        sticker: ':trophy:'
+                    }),
+                    addField('Trophies', player.trophies, {
+                        sticker: ':crossed_swords:'
+                    }),
+                    addField('Best Trophies', player.bestTrophies, {
+                        sticker: ':first_place:'
+                    }),
+                    addField('War Stars', player.warStars, {
+                        sticker: ':star:'
+                    }),
+                    addEmptyField(),
+                    addField('Total Attack Wins', player.achievements.find(achievement => achievement.name === 'Conqueror').value, {
+                        sticker: ':crossed_swords:'
+                    }),
+                    addField('Total Defense Wins', player.achievements.find(achievement => achievement.name === 'Unbreakable').value, {
+                        sticker: ':shield:'
+                    }),
+                    addField('Total Donations', player.achievements.find(achievement => achievement.name === 'Friend in Need').value, {
+                        sticker: ':gift:'
+                    })
                 )
                 .setImage(getTHImage(player.townHallLevel, player.townHallWeaponLevel ? player.townHallWeaponLevel : 0))
                 .setFooter({ text: 'Clash of Clans' });

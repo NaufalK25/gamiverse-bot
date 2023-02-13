@@ -27,14 +27,26 @@ module.exports = {
                 .setURL(player.url)
                 .setThumbnail(CHESS_THUMBNAIL)
                 .addFields(
-                    addField('Followers', player.followers),
-                    addField('Country', country.name || 'None'),
+                    addField('Followers', player.followers, {
+                        sticker: ':busts_in_silhouette:'
+                    }),
+                    addField('Country', country.name || 'None', {
+                        sticker: `:flag_${country.code.toLowerCase()}:`
+                    }),
                     addEmptyField(),
-                    addField('Status', player.status),
-                    addField('League', player.league || 'None'),
+                    addField('Status', player.status, {
+                        sticker: ':star:'
+                    }),
+                    addField('League', player.league || 'None', {
+                        sticker: ':trophy:'
+                    }),
                     addEmptyField(),
-                    addField('Last Online', humanizeDate(player.last_online)),
-                    addField('Member Since', humanizeDate(player.joined))
+                    addField('Last Online', humanizeDate(new Date(player.last_online * 1000)), {
+                        sticker: ':calendar:'
+                    }),
+                    addField('Member Since', humanizeDate(new Date(player.joined * 1000)), {
+                        sticker: ':calendar:'
+                    })
                 )
                 .setFooter({ text: 'Chess.com' });
 

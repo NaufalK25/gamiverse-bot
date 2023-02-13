@@ -4,11 +4,12 @@ Gamiverse is a discord bot that can get player stats from various games and disp
 
 Game support is currently limited to:
 
-1. [Clash of Clans](https://www.clashofclans.com/)
-2. [Clash Royale](https://clashroyale.com/)
-3. [Brawl Stars](https://brawlstars.com/)
+1. [Brawl Stars](https://brawlstars.com/)
+2. [Clash of Clans](https://www.clashofclans.com/)
+3. [Clash Royale](https://clashroyale.com/)
 4. [Chess.com](https://www.chess.com/)
 5. [PUBG](https://na.battlegrounds.pubg.com/)
+6. [TETR.io](https://tetr.io/)
 
 ## Commands
 
@@ -17,3 +18,4 @@ Game support is currently limited to:
 3. `/bs <player tag>` - Get Brawl Stars player profile
 4. `/chess <player username>` - Get Chess.com player profile
 5. `/pubg <platform> <account id>` - Get PUBG player profile
+6. `/tetr <player username>` - Get TETR.io player profile

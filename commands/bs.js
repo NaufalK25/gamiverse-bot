@@ -41,12 +41,22 @@ module.exports = {
                 .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
                 .setThumbnail(BS_THUMBNAIL)
                 .addFields(
-                    addField('Solo Victories', player.soloVictories),
-                    addField('Duo Victories', player.duoVictories),
-                    addField('3v3 Victories', player['3vs3Victories']),
+                    addField('Solo Victories', player.soloVictories, {
+                        sticker: ':crossed_swords:'
+                    }),
+                    addField('Duo Victories', player.duoVictories, {
+                        sticker: ':crossed_swords:'
+                    }),
+                    addField('3v3 Victories', player['3vs3Victories'], {
+                        sticker: ':crossed_swords:'
+                    }),
                     addEmptyField(),
-                    addField('Trophies', player.trophies),
-                    addField('Highest Trophies', player.highestTrophies)
+                    addField('Trophies', player.trophies, {
+                        sticker: ':trophy:'
+                    }),
+                    addField('Highest Trophies', player.highestTrophies, {
+                        sticker: ':trophy:'
+                    })
                 )
                 .setFooter({ text: 'Brawl Stars' });
 
