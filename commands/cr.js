@@ -144,14 +144,14 @@ module.exports = {
                         sticker: ':trophy:'
                     }),
                     addEmptyField(),
+                    addField('Battle Count', player.battleCount, {
+                        sticker: ':crossed_swords:'
+                    }),
                     addField('Wins', player.wins, {
                         sticker: ':crossed_swords:'
                     }),
                     addField('Losses', player.losses, {
                         sticker: ':x:'
-                    }),
-                    addField('Battle Count', player.battleCount, {
-                        sticker: ':crossed_swords:'
                     }),
                     addField('Three Crown Wins', player.threeCrownWins, {
                         sticker: ':crown:'
