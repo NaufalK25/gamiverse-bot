@@ -19,10 +19,10 @@ const addField = (name, value, option = { inline: true, highlight: true, sticker
 };
 
 const addEmptyField = () => {
-    return addField('\u200B', '\u200B', { inline: false, highlight: false });
+    return addTitleOnlyField('\u200B');
 };
 
-addTitleOnlyField = title => {
+const addTitleOnlyField = title => {
     return addField(title, '\u200B', { inline: false, highlight: false });
 };
 

@@ -21,7 +21,7 @@ module.exports = {
             });
 
             if (player.reason === 'notFound') {
-                const embed = createErrorEmbed(BS_THUMBNAIL, `Player with tag \`#${argTag}\` doesn't exist`, 'Brawl Stars');
+                const embed = createErrorEmbed(BS_THUMBNAIL, `Player with tag \`#${argTag}\` not found`, 'Brawl Stars');
                 return interaction.reply({ embeds: [embed] });
             }
 
@@ -32,7 +32,7 @@ module.exports = {
             }
 
             if (player.reason) {
-                const embed = createErrorEmbed(BS_THUMBNAIL, `Unknown error: \`${player.message}\``, 'Brawl Stars');
+                const embed = createErrorEmbed(BS_THUMBNAIL, `${player.reason}: ${player.message}`, 'Brawl Stars');
                 return interaction.reply({ embeds: [embed] });
             }
 

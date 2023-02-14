@@ -70,7 +70,7 @@ module.exports = {
             });
 
             if (player.reason === 'notFound') {
-                const embed = createErrorEmbed(COC_THUMBNAIL, `Player with tag \`#${argTag}\` doesn't exist`, 'Clash of Clans');
+                const embed = createErrorEmbed(COC_THUMBNAIL, `Player with tag \`#${argTag}\` not found`, 'Clash of Clans');
                 return interaction.reply({ embeds: [embed] });
             }
 
@@ -81,7 +81,7 @@ module.exports = {
             }
 
             if (player.reason) {
-                const embed = createErrorEmbed(COC_THUMBNAIL, `Unknown error: \`${player.message}\``, 'Clash of Clans');
+                const embed = createErrorEmbed(COC_THUMBNAIL, `${player.reason}: ${player.message}`, 'Clash of Clans');
                 return interaction.reply({ embeds: [embed] });
             }
 

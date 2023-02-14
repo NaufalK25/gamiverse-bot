@@ -34,7 +34,7 @@ module.exports = {
             const player = await nodeFetch(`https://ch.tetr.io/api/users/${argUsername}`);
 
             if (!player.success) {
-                const embed = createErrorEmbed(TETRIO_THUMBNAIL, `Player with username \`${argUsername}\` doesn't exist`, 'TETR.io');
+                const embed = createErrorEmbed(TETRIO_THUMBNAIL, `Player with username \`${argUsername}\` not found`, 'TETR.io');
                 return interaction.reply({ embeds: [embed] });
             }
 
@@ -76,7 +76,6 @@ module.exports = {
 
             interaction.reply({ embeds: [embed] });
         } catch (err) {
-            console.log(err);
             const embed = createErrorEmbed(
                 TETRIO_THUMBNAIL,
                 ['This error can be caused by:', '1. Rate limit exceeded', '2. Internal server error', '3. Server is under maintenance', 'Please contact the developer if the error persists.'].join(

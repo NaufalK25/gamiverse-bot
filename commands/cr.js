@@ -107,7 +107,7 @@ module.exports = {
             });
 
             if (player.reason === 'notFound') {
-                const embed = createErrorEmbed(CR_THUMBNAIL, `Player with tag \`#${argTag}\` doesn't exist`, 'Clash Royale');
+                const embed = createErrorEmbed(CR_THUMBNAIL, `Player with tag \`#${argTag}\` not found`, 'Clash Royale');
                 return interaction.reply({ embeds: [embed] });
             }
 
@@ -118,7 +118,7 @@ module.exports = {
             }
 
             if (player.reason) {
-                const embed = createErrorEmbed(CR_THUMBNAIL, `Unknown error: \`${player.message}\``, 'Clash Royale');
+                const embed = createErrorEmbed(CR_THUMBNAIL, `${player.rason}: ${player.message}`, 'Clash Royale');
                 return interaction.reply({ embeds: [embed] });
             }
 

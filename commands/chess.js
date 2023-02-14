@@ -15,7 +15,7 @@ module.exports = {
             const player = await nodeFetch(`https://api.chess.com/pub/player/${argUsername}`);
 
             if (player.code === 0) {
-                const embed = createErrorEmbed(CHESS_THUMBNAIL, `Player with username \`${argUsername}\` doesn't exist`, 'Chess.com');
+                const embed = createErrorEmbed(CHESS_THUMBNAIL, `Player with username \`${argUsername}\` not found`, 'Chess.com');
                 return interaction.reply({ embeds: [embed] });
             }
 

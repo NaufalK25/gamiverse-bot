@@ -3,6 +3,13 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const { addField, addEmptyField, addTitleOnlyField, createErrorEmbed, nodeFetch } = require('../helpers');
 
 const PUBG_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676216030/gamiverse/pubg/pubg_djuxe9.png';
+const PLATFORM = [
+    { name: 'Kakao', value: 'kakao' },
+    { name: 'PlayStation', value: 'psn' },
+    { name: 'Stadia', value: 'stadia' },
+    { name: 'Steam', value: 'steam' },
+    { name: 'Xbox', value: 'xbox' }
+];
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,15 +19,7 @@ module.exports = {
             option
                 .setName('platform')
                 .setDescription('The platform that the player is playing on')
-                .setChoices(
-                    ...[
-                        { name: 'Kakao', value: 'kakao' },
-                        { name: 'PlayStation', value: 'psn' },
-                        { name: 'Stadia', value: 'stadia' },
-                        { name: 'Steam', value: 'steam' },
-                        { name: 'Xbox', value: 'xbox' }
-                    ]
-                )
+                .setChoices(...PLATFORM.map(({ name, value }) => ({ name, value })))
                 .setRequired(true)
         )
         .addStringOption(option => option.setName('accountid').setDescription('The account id of the player').setRequired(true)),
@@ -37,8 +36,14 @@ module.exports = {
             };
             const player = await nodeFetch(`https://api.pubg.com/shards/${argPlatform}/players/${argAccountId}`, reqInit);
 
+            const notFoundTitles = ['Bad Request', 'Not Found'];
             if (player.errors) {
                 const { title, detail } = player.errors[0];
+                if (notFoundTitles.includes(title)) {
+                    const embed = createErrorEmbed(PUBG_THUMBNAIL, `\`${PLATFORM.find(({ value }) => value === argPlatform).name}\` player with account id \`${argAccountId}\` not found.`, 'PUBG');
+                    return interaction.reply({ embeds: [embed] });
+                }
+
                 const embed = createErrorEmbed(PUBG_THUMBNAIL, `${title}: ${detail}`, 'PUBG');
                 return interaction.reply({ embeds: [embed] });
             }
@@ -111,7 +116,6 @@ module.exports = {
 
             interaction.reply({ embeds: [embed] });
         } catch (err) {
-            console.log(err);
             const embed = createErrorEmbed(
                 PUBG_THUMBNAIL,
                 [
