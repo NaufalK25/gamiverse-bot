@@ -4,9 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js",
-        "dev": "nodemon index.js",
-        "command:deploy": "node deploy-commands.js",
+        "dc:start": "node discord/index.js",
+        "dc:command:deploy": "node discord/deploy-commands.js",
+        "tg:start": "node telegram/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
@@ -16,9 +16,7 @@
         "discord.js": "^14.7.1",
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
-        "node-fetch": "^3.3.0"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.20"
+        "node-fetch": "^3.3.0",
+        "node-telegram-bot-api": "^0.61.0"
     }
 }

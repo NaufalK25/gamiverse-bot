@@ -70,13 +70,21 @@ module.exports = {
             });
 
             if (player.reason === 'notFound') {
-                const embed = createErrorEmbed(COC_THUMBNAIL, `Player with tag \`#${argTag}\` not found`, 'Clash of Clans');
+                const embed = createErrorEmbed(
+                    COC_THUMBNAIL,
+                    `Sorry, we couldn't find a player with the tag \`${argTag}\`. Please check that you have entered the correct tag and try again`,
+                    'Clash of Clans'
+                );
                 return interaction.reply({ embeds: [embed] });
             }
 
             if (player.reason === 'accessDenied.invalidIp') {
-                const invalidIP = player.message.split(' ').at(-1);
-                const embed = createErrorEmbed(COC_THUMBNAIL, `Invalid IP Adress: \`${invalidIP}\``, 'Clash of Clans');
+                const notAllowedIP = player.message.split(' ').at(-1);
+                const embed = createErrorEmbed(
+                    COC_THUMBNAIL,
+                    `Sorry, the server IP address is not allowed: \`${notAllowedIP}\`. Please contact the developer to add this IP address to the list of allowed IP addresses.`,
+                    'Clash of Clans'
+                );
                 return interaction.reply({ embeds: [embed] });
             }
 

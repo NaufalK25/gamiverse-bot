@@ -40,7 +40,11 @@ module.exports = {
             if (player.errors) {
                 const { title, detail } = player.errors[0];
                 if (notFoundTitles.includes(title)) {
-                    const embed = createErrorEmbed(PUBG_THUMBNAIL, `\`${PLATFORM.find(({ value }) => value === argPlatform).name}\` player with account id \`${argAccountId}\` not found.`, 'PUBG');
+                    const embed = createErrorEmbed(
+                        PUBG_THUMBNAIL,
+                        `Sorry, we couldn't find a \`${argPlatform}\` player with account id \`${argAccountId}\`. Please check that you have entered the correct platform and account id and try again`,
+                        'PUBG'
+                    );
                     return interaction.reply({ embeds: [embed] });
                 }
 
