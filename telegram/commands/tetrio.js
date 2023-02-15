@@ -4,7 +4,6 @@ module.exports = bot => {
     bot.onText(/\/tetrio (.+)/, async (msg, match) => {
         const chatId = msg.chat.id;
         const username = match[1].trim().toLowerCase();
-
         const player = await nodeFetch(`https://ch.tetr.io/api/users/${username}`);
 
         if (!player.success) {

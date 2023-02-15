@@ -4,7 +4,6 @@ module.exports = bot => {
     bot.onText(/\/chess (.+)/, async (msg, match) => {
         const chatId = msg.chat.id;
         const username = match[1].trim().toLowerCase();
-
         const player = await nodeFetch(`https://api.chess.com/pub/player/${username}`);
 
         if (player.code === 0) {

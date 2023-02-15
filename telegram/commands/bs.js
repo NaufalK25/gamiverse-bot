@@ -5,7 +5,6 @@ module.exports = bot => {
     bot.onText(/\/bs (.+)/, async (msg, match) => {
         const chatId = msg.chat.id;
         const tag = match[1].trim().toUpperCase();
-
         const player = await nodeFetch(`https://api.brawlstars.com/v1/players/%23${tag}`, {
             method: 'GET',
             headers: {

@@ -5,7 +5,6 @@ module.exports = bot => {
     bot.onText(/\/coc (.+)/, async (msg, match) => {
         const chatId = msg.chat.id;
         const tag = match[1].trim().toUpperCase();
-
         const player = await nodeFetch(`https://api.clashofclans.com/v1/players/%23${tag}`, {
             method: 'GET',
             headers: {

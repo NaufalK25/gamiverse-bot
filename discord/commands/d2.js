@@ -90,25 +90,27 @@ module.exports = {
                     addEmptyField()
                 );
 
-            for (const [idx, characterId] of playerStats.characterIds.entries()) {
-                const character = await nodeFetch(`https://www.bungie.net/Platform/Destiny2/${argPlatform}/Profile/${argMembershipId}/Character/${characterId}/?components=200`, reqInit);
-                const characterStats = character.Response.character.data;
+            if (playerStats.characterIds.length > 0) {
+                for (const [idx, characterId] of playerStats.characterIds.entries()) {
+                    const character = await nodeFetch(`https://www.bungie.net/Platform/Destiny2/${argPlatform}/Profile/${argMembershipId}/Character/${characterId}/?components=200`, reqInit);
+                    const characterStats = character.Response.character.data;
 
-                embed.addFields(
-                    addTitleOnlyField(`Character ${idx + 1}`),
-                    addField('Class', CLASS[characterStats.classType], {
-                        sticker: ':shield:'
-                    }),
-                    addField('Race', RACE[characterStats.raceType], {
-                        sticker: ':cat:'
-                    }),
-                    addField('Gender', GENDER[characterStats.genderType], {
-                        sticker: `:${characterStats.gender !== 3 ? GENDER[characterStats.genderType].toLowerCase() : 'no_entry'}_sign:`
-                    }),
-                    addField('Light', characterStats.light, {
-                        sticker: ':star:'
-                    })
-                );
+                    embed.addFields(
+                        addTitleOnlyField(`Character ${idx + 1}`),
+                        addField('Class', CLASS[characterStats.classType], {
+                            sticker: ':shield:'
+                        }),
+                        addField('Race', RACE[characterStats.raceType], {
+                            sticker: ':cat:'
+                        }),
+                        addField('Gender', GENDER[characterStats.genderType], {
+                            sticker: `:${characterStats.gender !== 3 ? GENDER[characterStats.genderType].toLowerCase() : 'no_entry'}_sign:`
+                        }),
+                        addField('Light', characterStats.light, {
+                            sticker: ':star:'
+                        })
+                    );
+                }
             }
 
             embed.setFooter({ text: 'Destiny 2' });
