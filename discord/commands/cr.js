@@ -126,7 +126,7 @@ module.exports = {
             }
 
             if (player.reason) {
-                const embed = createErrorEmbed(CR_THUMBNAIL, `${player.rason}: ${player.message}`, 'Clash Royale');
+                const embed = createErrorEmbed(CR_THUMBNAIL, `${player.reason}: ${player.message}`, 'Clash Royale');
                 return interaction.reply({ embeds: [embed] });
             }
 
