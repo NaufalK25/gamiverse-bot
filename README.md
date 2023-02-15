@@ -3,6 +3,8 @@
 ![Total Supported Games](https://img.shields.io/badge/Total%20Supported%20Games-7-green)
 ![Status Discord](https://img.shields.io/badge/Status-Online-green?logo=discord&logoColor=white)
 [![Invite Discord](https://img.shields.io/badge/-Invite%20Bot-404eed?style=flat&logo=discord&logoColor=white)](https://discord.com/api/oauth2/authorize?client_id=1074237343306883082&permissions=139586956352&scope=bot)
+![Status Telegram](https://img.shields.io/badge/Status-Online-green?logo=telegram&logoColor=white)
+[![Invite Telegram](https://img.shields.io/badge/-Chat%20With%20Bot-24a1dd?style=flat&logo=telegram&logoColor=white)](https://t.me/gamiverse_bot)
 
 Gamiverse is a discord bot that can get player stats from various games and display them in a simple and easy to read format.
 
