@@ -60,7 +60,13 @@ module.exports = {
             const notFoundErrorCodes = [7, 18, 217];
             if (player.ErrorCode !== 1) {
                 if (notFoundErrorCodes.includes(player.ErrorCode)) {
-                    const embed = createErrorEmbed(D2_THUMBNAIL, `\`${getPlatformName(argPlatform)}\` player with membership id \`${argMembershipId}\` not found.`, 'Destiny 2');
+                    const embed = createErrorEmbed(
+                        D2_THUMBNAIL,
+                        `Sorry, we couldn't find a \`${getPlatformName(
+                            argPlatform
+                        )}\` player with account id \`${argMembershipId}\`. Please check that you have entered the correct platform and membership id and try again`,
+                        'Destiny 2'
+                    );
                     return interaction.reply({ embeds: [embed] });
                 }
 

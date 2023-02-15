@@ -34,7 +34,11 @@ module.exports = {
             const player = await nodeFetch(`https://ch.tetr.io/api/users/${argUsername}`);
 
             if (!player.success) {
-                const embed = createErrorEmbed(TETRIO_THUMBNAIL, `Player with username \`${argUsername}\` not found`, 'TETR.io');
+                const embed = createErrorEmbed(
+                    TETRIO_THUMBNAIL,
+                    `Sorry, we couldn't find a player with the username \`${argUsername}\`. Please check that you have entered the correct username and try again`,
+                    'TETR.io'
+                );
                 return interaction.reply({ embeds: [embed] });
             }
 

@@ -107,13 +107,21 @@ module.exports = {
             });
 
             if (player.reason === 'notFound') {
-                const embed = createErrorEmbed(CR_THUMBNAIL, `Player with tag \`#${argTag}\` not found`, 'Clash Royale');
+                const embed = createErrorEmbed(
+                    CR_THUMBNAIL,
+                    `Sorry, we couldn't find a player with the tag \`${argTag}\`. Please check that you have entered the correct tag and try again`,
+                    'Clash Royale'
+                );
                 return interaction.reply({ embeds: [embed] });
             }
 
             if (player.reason === 'accessDenied.invalidIp') {
-                const invalidIP = player.message.split(' ').at(-1);
-                const embed = createErrorEmbed(CR_THUMBNAIL, `Invalid IP Adress: \`${invalidIP}\``, 'Clash Royale');
+                const notAllowedIP = player.message.split(' ').at(-1);
+                const embed = createErrorEmbed(
+                    CR_THUMBNAIL,
+                    `Sorry, the server IP address is not allowed: ${notAllowedIP}. Please contact the developer to add this IP address to the list of allowed IP addresses.`,
+                    'Clash Royale'
+                );
                 return interaction.reply({ embeds: [embed] });
             }
 
