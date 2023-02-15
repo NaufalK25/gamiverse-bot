@@ -1,6 +1,6 @@
 require('dotenv').config();
-const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, addEmptyField, createErrorEmbed, humanizeDate, nodeFetch } = require('../helpers');
+const { EmbedBuilder, SlashCommandBuilder, time, TimestampStyles } = require('discord.js');
+const { addField, addEmptyField, createErrorEmbed, nodeFetch } = require('../helpers');
 
 const TETRIO_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676279934/gamiverse/tetrio/tetrio_h3zdkg.png';
 const RANK_IMAGES = {
@@ -49,7 +49,8 @@ module.exports = {
                     addField('Country', playerStats.country || 'None', {
                         sticker: `:flag_${playerStats.country.toLowerCase()}:`
                     }),
-                    addField('Member Since', humanizeDate(new Date(playerStats.ts)), {
+                    addField('Member Since', time(Math.round(new Date(playerStats.ts).getTime() / 1000), TimestampStyles.RelativeTime), {
+                        highlight: false,
                         sticker: ':calendar:'
                     }),
                     addEmptyField(),

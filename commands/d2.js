@@ -1,6 +1,6 @@
 require('dotenv').config();
-const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, addEmptyField, addTitleOnlyField, createErrorEmbed, humanizeDate, nodeFetch } = require('../helpers');
+const { EmbedBuilder, SlashCommandBuilder, time, TimestampStyles } = require('discord.js');
+const { addField, addEmptyField, addTitleOnlyField, createErrorEmbed, nodeFetch } = require('../helpers');
 
 const D2_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676363551/gamiverse/d2/d2_segzwy.png';
 const PLATFORM = [
@@ -77,7 +77,8 @@ module.exports = {
                 .setURL(`https://www.bungie.net/${playerStats.versionsOwned}/en/User/Profile/${argPlatform}/${argMembershipId}?bgn=${playerStats.userInfo.bungieGlobalDisplayName}`)
                 .setThumbnail(D2_THUMBNAIL)
                 .addFields(
-                    addField('Last Played', humanizeDate(new Date(playerStats.dateLastPlayed)), {
+                    addField('Last Played', time(Math.round(new Date(playerStats.dateLastPlayed).getTime() / 1000), TimestampStyles.RelativeTime), {
+                        highlight: false,
                         sticker: ':calendar:'
                     }),
                     addEmptyField()

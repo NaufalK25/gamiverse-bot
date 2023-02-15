@@ -1,6 +1,6 @@
 require('dotenv').config();
-const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, addEmptyField, createErrorEmbed, humanizeDate, nodeFetch } = require('../helpers');
+const { EmbedBuilder, SlashCommandBuilder, time, TimestampStyles } = require('discord.js');
+const { addField, addEmptyField, createErrorEmbed, nodeFetch } = require('../helpers');
 
 const CHESS_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676176840/gamiverse/chess/chess_xopl8k.png';
 
@@ -41,10 +41,12 @@ module.exports = {
                         sticker: ':trophy:'
                     }),
                     addEmptyField(),
-                    addField('Last Online', humanizeDate(new Date(player.last_online * 1000)), {
+                    addField('Last Online', time(player.last_online, TimestampStyles.RelativeTime), {
+                        highlight: false,
                         sticker: ':calendar:'
                     }),
-                    addField('Member Since', humanizeDate(new Date(player.joined * 1000)), {
+                    addField('Member Since', time(player.joined, TimestampStyles.RelativeTime), {
+                        highlight: false,
                         sticker: ':calendar:'
                     })
                 )
