@@ -16,5 +16,3 @@ for (const file of commandFiles) {
 }
 
 console.log('Bot started');
-
-module.exports = bot;

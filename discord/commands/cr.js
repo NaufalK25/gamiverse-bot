@@ -148,7 +148,7 @@ module.exports = {
                     addField('Trophies', player.trophies, {
                         sticker: ':trophy:'
                     }),
-                    addField('Highest Trophies', player.bestTrophies, {
+                    addField('Best Trophies', player.bestTrophies, {
                         sticker: ':trophy:'
                     }),
                     addEmptyField(),

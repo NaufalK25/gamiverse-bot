@@ -1,6 +1,6 @@
 const { humanizeDate, nodeFetch } = require('../helpers');
 
-const chessCommand = bot => {
+module.exports = bot => {
     bot.onText(/\/chess (.+)/, async (msg, match) => {
         const chatId = msg.chat.id;
         const username = match[1].trim().toLowerCase();
@@ -30,5 +30,3 @@ const chessCommand = bot => {
         });
     });
 };
-
-module.exports = chessCommand;
