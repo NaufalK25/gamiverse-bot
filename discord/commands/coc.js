@@ -82,7 +82,7 @@ module.exports = {
                 const notAllowedIP = player.message.split(' ').at(-1);
                 const embed = createErrorEmbed(
                     COC_THUMBNAIL,
-                    `Sorry, the server IP address is not allowed: ${notAllowedIP}. Please contact the developer to add this IP address to the list of allowed IP addresses.`,
+                    `Sorry, the server IP address is not allowed: \`${notAllowedIP}\`. Please contact the developer to add this IP address to the list of allowed IP addresses.`,
                     'Clash of Clans'
                 );
                 return interaction.reply({ embeds: [embed] });

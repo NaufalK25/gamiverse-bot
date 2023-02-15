@@ -33,7 +33,7 @@ module.exports = {
                 const notAllowedIP = player.message.split(' ').at(-1);
                 const embed = createErrorEmbed(
                     BS_THUMBNAIL,
-                    `Sorry, the server IP address is not allowed: ${notAllowedIP}. Please contact the developer to add this IP address to the list of allowed IP addresses.`,
+                    `Sorry, the server IP address is not allowed: \`${notAllowedIP}\`. Please contact the developer to add this IP address to the list of allowed IP addresses.`,
                     'Brawl Stars'
                 );
                 return interaction.reply({ embeds: [embed] });
