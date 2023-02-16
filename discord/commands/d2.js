@@ -103,7 +103,7 @@ module.exports = {
             option
                 .setName('platform')
                 .setDescription('The platform that the player is playing on')
-                .setChoices(...PLATFORM.map(({ name, value }) => ({ name, value })))
+                .setChoices(...PLATFORM)
                 .setRequired(true)
         )
         .addStringOption(option => option.setName('membershipid').setDescription('The membership id of the player').setRequired(true)),
