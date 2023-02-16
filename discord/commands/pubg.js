@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, addEmptyField, addTitleOnlyField, createErrorEmbed, nodeFetch } = require('../helpers');
+const { addField, addEmptyField, addTitleOnlyField, createErrorEmbed, nodeFetch, sendEmbedWithPagination } = require('../helpers');
 
 const PUBG_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676216030/gamiverse/pubg/pubg_djuxe9.png';
 const PLATFORM = [
@@ -10,6 +10,40 @@ const PLATFORM = [
     { name: 'Steam', value: 'steam' },
     { name: 'Xbox', value: 'xbox' }
 ];
+
+const createPUBGEmbed = (player, stats, { title, data, page }) => {
+    return new EmbedBuilder()
+        .setColor('#F2A900')
+        .setTitle(`${player.data.attributes.name} | ${player.data.attributes.shardId}`)
+        .setDescription(player.data.id)
+        .setThumbnail(PUBG_THUMBNAIL)
+        .addFields(
+            addField('Best Rank Point', stats.data.attributes.bestRankPoint, {
+                sticker: ':medal:'
+            }),
+            addEmptyField(),
+            addTitleOnlyField(title),
+            addField('Top 10s', data.top10s, {
+                sticker: ':first_place:'
+            }),
+            addField('Wins', data.wins, {
+                sticker: ':trophy:'
+            }),
+            addField('Losses', data.losses, {
+                sticker: ':x:'
+            }),
+            addField('Kills', data.kills, {
+                sticker: ':gun:'
+            }),
+            addField('Headshot Kills', data.headshotKills, {
+                sticker: ':skull_crossbones:'
+            }),
+            addField('Assists', data.assists, {
+                sticker: ':handshake:'
+            })
+        )
+        .setFooter({ text: `PUBG | Page ${page.current} of ${page.total}` });
+};
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -54,72 +88,22 @@ module.exports = {
 
             const stats = await nodeFetch(`https://api.pubg.com/shards/${argPlatform}/players/${argAccountId}/seasons/lifetime`, reqInit);
             const { solo, duo, squad } = stats.data.attributes.gameModeStats;
+            const soloFPP = stats.data.attributes.gameModeStats['solo-fpp'];
+            const duoFPP = stats.data.attributes.gameModeStats['duo-fpp'];
+            const squadFPP = stats.data.attributes.gameModeStats['squad-fpp'];
 
-            const embed = new EmbedBuilder()
-                .setColor('#F2A900')
-                .setTitle(`${player.data.attributes.name} | ${player.data.attributes.shardId}`)
-                .setDescription(player.data.id)
-                .addFields(
-                    addField('Best Rank Point', stats.data.attributes.bestRankPoint, {
-                        sticker: ':medal:'
-                    }),
-                    addEmptyField(),
-                    addTitleOnlyField('Solo'),
-                    addField('Top 10s', solo.top10s, {
-                        sticker: ':first_place:'
-                    }),
-                    addField('Wins', solo.wins, {
-                        sticker: ':trophy:'
-                    }),
-                    addField('Losses', solo.losses, {
-                        sticker: ':x:'
-                    }),
-                    addField('Kills', solo.kills, {
-                        sticker: ':gun:'
-                    }),
-                    addField('Assists', solo.assists, {
-                        sticker: ':handshake:'
-                    }),
-                    addEmptyField(),
-                    addTitleOnlyField('Duo'),
-                    addField('Top 10s', duo.top10s, {
-                        sticker: ':first_place:'
-                    }),
-                    addField('Wins', duo.wins, {
-                        sticker: ':trophy:'
-                    }),
-                    addField('Losses', duo.losses, {
-                        sticker: ':x:'
-                    }),
-                    addField('Kills', duo.kills, {
-                        sticker: ':gun:'
-                    }),
-                    addField('Assists', duo.assists, {
-                        sticker: ':handshake:'
-                    }),
-                    addEmptyField(),
-                    addTitleOnlyField('Squad'),
-                    addField('Top 10s', squad.top10s, {
-                        sticker: ':first_place:'
-                    }),
-                    addField('Wins', squad.wins, {
-                        sticker: ':trophy:'
-                    }),
-                    addField('Losses', squad.losses, {
-                        sticker: ':x:'
-                    }),
-                    addField('Kills', squad.kills, {
-                        sticker: ':gun:'
-                    }),
-                    addField('Assists', squad.assists, {
-                        sticker: ':handshake:'
-                    })
-                )
-                .setThumbnail(PUBG_THUMBNAIL)
-                .setFooter({ text: 'PUBG' });
+            const embeds = [
+                createPUBGEmbed(player, stats, { title: 'Solo', data: solo, page: { current: 1, total: 6 } }),
+                createPUBGEmbed(player, stats, { title: 'Solo FPP', data: soloFPP, page: { current: 2, total: 6 } }),
+                createPUBGEmbed(player, stats, { title: 'Duo', data: duo, page: { current: 3, total: 6 } }),
+                createPUBGEmbed(player, stats, { title: 'Duo FPP', data: duoFPP, page: { current: 4, total: 6 } }),
+                createPUBGEmbed(player, stats, { title: 'Squad', data: squad, page: { current: 5, total: 6 } }),
+                createPUBGEmbed(player, stats, { title: 'Squad FPP', data: squadFPP, page: { current: 6, total: 6 } })
+            ];
 
-            interaction.reply({ embeds: [embed] });
+            await sendEmbedWithPagination(interaction, embeds);
         } catch (err) {
+            console.log(err);
             const embed = createErrorEmbed(
                 PUBG_THUMBNAIL,
                 [
