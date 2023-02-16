@@ -108,7 +108,7 @@ module.exports = {
 
             if (player.reason === 'accessDenied') {
                 const embed = createErrorEmbed(CR_THUMBNAIL, `Sorry, this command is temporarily remove. Please check the documentation for more information`, 'Clash Royale');
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             if (player.reason === 'notFound') {
@@ -117,7 +117,7 @@ module.exports = {
                     `Sorry, we couldn't find a player with the tag \`${argTag}\`. Please check that you have entered the correct tag and try again`,
                     'Clash Royale'
                 );
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             if (player.reason === 'accessDenied.invalidIp') {
@@ -127,12 +127,12 @@ module.exports = {
                     `Sorry, the server IP address is not allowed: \`${notAllowedIP}\`. Please contact the developer to add this IP address to the list of allowed IP addresses.`,
                     'Clash Royale'
                 );
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             if (player.reason) {
                 const embed = createErrorEmbed(CR_THUMBNAIL, `${player.reason}: ${player.message}`, 'Clash Royale');
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             const embed = new EmbedBuilder()
@@ -173,7 +173,8 @@ module.exports = {
                 .setImage(ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].image)
                 .setFooter({ text: 'Clash Royale' });
 
-            interaction.reply({ embeds: [embed] });
+            await interaction.deferReply();
+            await interaction.editReply({ embeds: [embed] });
         } catch (err) {
             const embed = createErrorEmbed(
                 CR_THUMBNAIL,
@@ -189,7 +190,7 @@ module.exports = {
                 'Clash Royale'
             );
 
-            interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed] });
         }
     }
 };

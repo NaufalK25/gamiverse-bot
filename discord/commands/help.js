@@ -42,6 +42,6 @@ module.exports = {
             )
             .setFooter({ text: 'Gamiverse Bot' });
 
-        return interaction.reply({ embeds: [embed] });
+        return await interaction.reply({ embeds: [embed] });
     }
 };

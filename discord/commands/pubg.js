@@ -79,11 +79,11 @@ module.exports = {
                         `Sorry, we couldn't find a \`${argPlatform}\` player with account id \`${argAccountId}\`. Please check that you have entered the correct platform and account id and try again`,
                         'PUBG'
                     );
-                    return interaction.reply({ embeds: [embed] });
+                    return await interaction.reply({ embeds: [embed] });
                 }
 
                 const embed = createErrorEmbed(PUBG_THUMBNAIL, `${title}: ${detail}`, 'PUBG');
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             const stats = await nodeFetch(`https://api.pubg.com/shards/${argPlatform}/players/${argAccountId}/seasons/lifetime`, reqInit);
@@ -101,9 +101,9 @@ module.exports = {
                 createPUBGEmbed(player, stats, { title: 'Squad FPP', data: squadFPP, page: { current: 6, total: 6 } })
             ];
 
+            await interaction.deferReply();
             await sendEmbedWithPagination(interaction, embeds);
         } catch (err) {
-            console.log(err);
             const embed = createErrorEmbed(
                 PUBG_THUMBNAIL,
                 [
@@ -118,7 +118,7 @@ module.exports = {
                 'PUBG'
             );
 
-            interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed] });
         }
     }
 };

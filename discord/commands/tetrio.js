@@ -39,7 +39,7 @@ module.exports = {
                     `Sorry, we couldn't find a player with the username \`${argUsername}\`. Please check that you have entered the correct username and try again`,
                     'TETR.io'
                 );
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             const playerStats = player.data.user;
@@ -79,7 +79,8 @@ module.exports = {
 
             embed.setFooter({ text: 'TETR.io' });
 
-            interaction.reply({ embeds: [embed] });
+            await interaction.deferReply();
+            await interaction.editReply({ embeds: [embed] });
         } catch (err) {
             const embed = createErrorEmbed(
                 TETRIO_THUMBNAIL,
@@ -89,7 +90,7 @@ module.exports = {
                 'TETR.io'
             );
 
-            interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed] });
         }
     }
 };

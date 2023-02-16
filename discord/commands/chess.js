@@ -20,7 +20,7 @@ module.exports = {
                     `Sorry, we couldn't find a player with the username \`${argUsername}\`. Please check that you have entered the correct username and try again`,
                     'Chess.com'
                 );
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             const country = await nodeFetch(player.country);
@@ -56,7 +56,8 @@ module.exports = {
                 )
                 .setFooter({ text: 'Chess.com' });
 
-            interaction.reply({ embeds: [embed] });
+            await interaction.deferReply();
+            await interaction.editReply({ embeds: [embed] });
         } catch (err) {
             const embed = createErrorEmbed(
                 CHESS_THUMBNAIL,
@@ -66,7 +67,7 @@ module.exports = {
                 'Chess.com'
             );
 
-            interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed] });
         }
     }
 };

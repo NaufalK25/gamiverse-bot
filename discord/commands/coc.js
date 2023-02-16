@@ -71,7 +71,7 @@ module.exports = {
 
             if (player.reason === 'accessDenied') {
                 const embed = createErrorEmbed(COC_THUMBNAIL, `Sorry, this command is temporarily remove. Please check the documentation for more information`, 'Clash of Clans');
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             if (player.reason === 'notFound') {
@@ -80,7 +80,7 @@ module.exports = {
                     `Sorry, we couldn't find a player with the tag \`${argTag}\`. Please check that you have entered the correct tag and try again`,
                     'Clash of Clans'
                 );
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             if (player.reason === 'accessDenied.invalidIp') {
@@ -90,12 +90,12 @@ module.exports = {
                     `Sorry, the server IP address is not allowed: \`${notAllowedIP}\`. Please contact the developer to add this IP address to the list of allowed IP addresses.`,
                     'Clash of Clans'
                 );
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             if (player.reason) {
                 const embed = createErrorEmbed(COC_THUMBNAIL, `${player.reason}: ${player.message}`, 'Clash of Clans');
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             const embed = new EmbedBuilder()
@@ -136,7 +136,8 @@ module.exports = {
                 .setImage(getTHImage(player.townHallLevel, player.townHallWeaponLevel ? player.townHallWeaponLevel : 0))
                 .setFooter({ text: 'Clash of Clans' });
 
-            interaction.reply({ embeds: [embed] });
+            await interaction.deferReply();
+            await interaction.editReply({ embeds: [embed] });
         } catch (err) {
             const embed = createErrorEmbed(
                 COC_THUMBNAIL,
@@ -152,7 +153,7 @@ module.exports = {
                 'Clash of Clans'
             );
 
-            interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed] });
         }
     }
 };

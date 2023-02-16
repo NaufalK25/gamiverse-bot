@@ -129,11 +129,11 @@ module.exports = {
                         )}\` player with account id \`${argMembershipId}\`. Please check that you have entered the correct platform and membership id and try again`,
                         'Destiny 2'
                     );
-                    return interaction.reply({ embeds: [embed] });
+                    return await interaction.reply({ embeds: [embed] });
                 }
 
                 const embed = createErrorEmbed(D2_THUMBNAIL, `${player.ErrorStatus}: ${player.Message}`, 'Destiny 2');
-                return interaction.reply({ embeds: [embed] });
+                return await interaction.reply({ embeds: [embed] });
             }
 
             const playerStats = player.Response.profile.data;
@@ -148,9 +148,9 @@ module.exports = {
                 }
             }
 
+            await interaction.deferReply();
             await sendEmbedWithPagination(interaction, embeds);
         } catch (err) {
-            console.error(err);
             const embed = createErrorEmbed(
                 D2_THUMBNAIL,
                 [
@@ -165,7 +165,7 @@ module.exports = {
                 'Destiny 2'
             );
 
-            interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed] });
         }
     }
 };

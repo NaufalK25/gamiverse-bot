@@ -1,4 +1,4 @@
-const { CommandInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
 const addField = (name, value, option = { inline: true, highlight: true, sticker: null }) => {
     let { inline, highlight, sticker } = option;
@@ -64,7 +64,7 @@ const createEmbedPagination = (embeds, row, collector, { prevButton, nextButton 
 
 const sendEmbedWithPagination = async (interaction, embeds) => {
     const { prevButton, nextButton, row } = createPrevNextButtonRow(embeds);
-    const msg = await interaction.reply({ embeds: [embeds[0]], components: [row] });
+    const msg = await interaction.editReply({ embeds: [embeds[0]], components: [row] });
     const filterCustomId = i => i.customId === 'prev' || i.customId === 'next';
     const collector = msg.createMessageComponentCollector({ filter: filterCustomId, time: 60000 });
 
