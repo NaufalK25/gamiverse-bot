@@ -1,7 +1,7 @@
 {
-    "name": "gamiverse",
+    "name": "gamiverse-bot",
     "version": "1.0.0",
-    "description": "Gamiverse is a discord bot that can get player stats from various games and display them in a simple and easy to read format",
+    "description": "Gamiverse is a bot that can get player stats from various games and display them in a simple and easy to read format",
     "scripts": {
         "dc:start": "node discord/index.js",
         "dc:command:deploy": "node discord/deploy-commands.js",

@@ -21,7 +21,7 @@ module.exports = {
                     sticker: ':cat:'
                 })
             )
-            .setFooter({ text: 'Gamiverse' });
+            .setFooter({ text: 'Gamiverse Bot' });
 
         return interaction.reply({ embeds: [embed] });
     }
