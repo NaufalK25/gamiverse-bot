@@ -106,6 +106,11 @@ module.exports = {
                 }
             });
 
+            if (player.reason === 'accessDenied') {
+                const embed = createErrorEmbed(CR_THUMBNAIL, `Sorry, this command is temporarily remove. Please check the documentation for more information`, 'Clash Royale');
+                return interaction.reply({ embeds: [embed] });
+            }
+
             if (player.reason === 'notFound') {
                 const embed = createErrorEmbed(
                     CR_THUMBNAIL,

@@ -69,6 +69,11 @@ module.exports = {
                 }
             });
 
+            if (player.reason === 'accessDenied') {
+                const embed = createErrorEmbed(COC_THUMBNAIL, `Sorry, this command is temporarily remove. Please check the documentation for more information`, 'Clash of Clans');
+                return interaction.reply({ embeds: [embed] });
+            }
+
             if (player.reason === 'notFound') {
                 const embed = createErrorEmbed(
                     COC_THUMBNAIL,

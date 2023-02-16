@@ -13,6 +13,12 @@ module.exports = bot => {
             }
         });
 
+        if (player.reason === 'accessDenied') {
+            return bot.sendMessage(chatId, `Sorry, this command is temporarily remove. Please check the documentation for more information`, {
+                parse_mode: 'HTML'
+            });
+        }
+
         if (player.reason === 'notFound') {
             return bot.sendMessage(chatId, `Sorry, we couldn't find a player with the tag <b>${tag}</b>. Please check that you have entered the correct tag and try again`, {
                 parse_mode: 'HTML'

@@ -20,6 +20,11 @@ module.exports = {
                 }
             });
 
+            if (player.reason === 'accessDenied') {
+                const embed = createErrorEmbed(BS_THUMBNAIL, `Sorry, this command is temporarily remove. Please check the documentation for more information`, 'Brawl Stars');
+                return interaction.reply({ embeds: [embed] });
+            }
+
             if (player.reason === 'notFound') {
                 const embed = createErrorEmbed(
                     BS_THUMBNAIL,

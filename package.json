@@ -1,8 +1,7 @@
 {
     "name": "gamiverse",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "description": "Gamiverse is a discord bot that can get player stats from various games and display them in a simple and easy to read format",
     "scripts": {
         "dc:start": "node discord/index.js",
         "dc:command:deploy": "node discord/deploy-commands.js",
@@ -10,8 +9,7 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "author": "NaufalK25",
     "dependencies": {
         "discord.js": "^14.7.1",
         "dotenv": "^16.0.3",
