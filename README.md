@@ -17,18 +17,18 @@ Gamiverse is a bot that can get player stats from various games and display them
 
 ### Game
 
-| Game           | Command                         | Desciption                      | Status             |
-| -------------- | ------------------------------- | ------------------------------- | ------------------ |
-| Brawl Stars    | `/bs <tag>`                     | Get Brawl Stars player stats    | Temporarily Remove |
-| Clash of Clans | `/coc <tag>`                    | Get Clash of Clans player stats | Temporarily Remove |
-| Clash Royale   | `/cr <tag>`                     | Get Clash Royale player stats   | Temporarily Remove |
-| Chess.com      | `/chess <username>`             | Get Chess.com player stats      | OK                 |
-| Destiny 2      | `/d2 <platform> <membershipId>` | Get Destiny 2 player stats      | OK                 |
-| PUBG           | `/pubg <platform> <accountId>`  | Get PUBG player stats           | OK                 |
-| TETR.io        | `/tetrio <username>`            | Get TETR.io player stats        | OK                 |
+| Game             | Command                         | Type          | Status             |
+| ---------------- | ------------------------------- | ------------- | ------------------ |
+| Brawl Stars      | `/bs <tag>`                     | API           | Temporarily Remove |
+| Clash of Clans   | `/coc <tag>`                    | API           | Temporarily Remove |
+| Clash Royale     | `/cr <tag>`                     | API           | Temporarily Remove |
+| Chess.com        | `/chess <username>`             | API           | OK                 |
+| Destiny 2        | `/d2 <platform> <membershipId>` | API           | OK                 |
+| Fate/Grand Order | `/fgo <server> <userId>`        | Web Scrapping | OK                 |
+| PUBG             | `/pubg <platform> <accountId>`  | API           | OK                 |
+| TETR.io          | `/tetrio <username>`            | API           | OK                 |
 
-> Note: Brawl Stars, Clash of Clans, and Clash Royale commands are temporarily removed due to how the API works.
-> The API requires an IP address to be whitelisted before it can be used and when restarting the bot, the IP address changes so I have to manually delete the old API key and create a new one.
+> **Note:** Brawl Stars, Clash of Clans, and Clash Royale commands are temporarily removed due to how the API works. The API requires an IP address to be whitelisted before it can be used and when restarting the bot, the IP address changes so I have to manually delete the old API key and create a new one.
 
 ## API
 
@@ -41,3 +41,21 @@ Gamiverse is a bot that can get player stats from various games and display them
 | Destiny 2      | https://bungie-net.github.io/multi/                              | `x-api-key` |   Yes    |
 | PUBG           | https://documentation.playbattlegrounds.com/en/introduction.html |  `Bearer`   |   Yes    |
 | TETR.io        | https://tetr.io/about/api/                                       |   `None`    |   Yes    |
+
+## Web Scrapping
+
+| Game             | Website              | Official |
+| ---------------- | -------------------- | :------: |
+| Fate/Grand Order | https://rayshift.io/ |    No    |
+
+> **Here is a warning**. When compared to using APIs for data retrieval, web scraping has several disadvantages:
+>
+> -   **Reliability:** Web scraping can break if the website's structure changes.
+> -   **Legal Issues:** Web scraping may pose legal risks and raise ethical concerns.
+> -   **Performance:** It can be slower and less efficient than APIs.
+> -   **Maintenance:** Frequent updates are needed to adapt to site changes.
+> -   **Limited Data:** May provide less structured and comprehensive data.
+
+> **Additional Notes:**
+>
+> -   `/fgo` command still has a bug where if the user id for master is not found, the bot does not provide any response and might crash the program.
