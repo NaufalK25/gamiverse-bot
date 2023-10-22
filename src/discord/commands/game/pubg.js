@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, addEmptyField, addTitleOnlyField, createErrorEmbed, nodeFetch, sendEmbedWithPagination } = require('../helpers');
+const { addEmptyField, addField, addTitleOnlyField, createErrorEmbed, sendEmbedWithPagination } = require('../../utils/embed');
+const { nodeFetch } = require('../../../utils/general');
 
 const PUBG_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676216030/gamiverse/pubg/pubg_djuxe9.png';
 const PLATFORM = [

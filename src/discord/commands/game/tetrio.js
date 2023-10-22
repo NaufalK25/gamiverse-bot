@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder, time, TimestampStyles } = require('discord.js');
-const { addField, addEmptyField, createErrorEmbed, nodeFetch } = require('../helpers');
+const { addEmptyField, addField, createErrorEmbed } = require('../../utils/embed');
+const { nodeFetch } = require('../../../utils/general');
 
 const TETRIO_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676279934/gamiverse/tetrio/tetrio_h3zdkg.png';
 const RANK_IMAGES = {

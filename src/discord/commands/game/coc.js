@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, addEmptyField, createErrorEmbed, nodeFetch } = require('../helpers');
+const { addEmptyField, addField, createErrorEmbed } = require('../../utils/embed');
+const { nodeFetch } = require('../../../utils/general');
 
 const COC_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676100894/gamiverse/coc/coc_jhd8vb.png';
 const TOWN_HALL_IMAGES = {

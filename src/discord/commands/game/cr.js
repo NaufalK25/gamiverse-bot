@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, addEmptyField, createErrorEmbed, nodeFetch } = require('../helpers');
+const { addEmptyField, addField, createErrorEmbed } = require('../../utils/embed');
+const { nodeFetch } = require('../../../utils/general');
 
 const CR_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676111869/gamiverse/cr/cr_nltoty.png';
 const ARENA_IMAGES = {

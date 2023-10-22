@@ -1,5 +1,5 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField } = require('../helpers');
+const { addField } = require('../utils/embed');
 
 module.exports = {
     data: new SlashCommandBuilder().setName('contact').setDescription('Get contact information for the developer'),

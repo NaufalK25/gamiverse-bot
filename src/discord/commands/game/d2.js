@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder, time, TimestampStyles } = require('discord.js');
-const { addField, addEmptyField, addTitleOnlyField, createErrorEmbed, nodeFetch, sendEmbedWithPagination } = require('../helpers');
+const { addEmptyField, addField, addTitleOnlyField, createErrorEmbed, sendEmbedWithPagination } = require('../../utils/embed');
+const { nodeFetch } = require('../../../utils/general');
 
 const D2_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676363551/gamiverse/d2/d2_segzwy.png';
 const PLATFORM = [

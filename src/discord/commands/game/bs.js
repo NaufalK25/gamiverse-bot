@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, addEmptyField, createErrorEmbed, nodeFetch } = require('../helpers');
+const { addEmptyField, addField, createErrorEmbed } = require('../../utils/embed');
+const { nodeFetch } = require('../../../utils/general');
 
 const BS_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676125350/gamiverse/bs/bs_huba5c.png';
 

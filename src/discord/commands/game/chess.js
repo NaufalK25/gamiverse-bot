@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder, time, TimestampStyles } = require('discord.js');
-const { addField, addEmptyField, createErrorEmbed, nodeFetch } = require('../helpers');
+const { addEmptyField, addField, createErrorEmbed } = require('../../utils/embed');
+const { nodeFetch } = require('../../../utils/general');
 
 const CHESS_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676176840/gamiverse/chess/chess_xopl8k.png';
 

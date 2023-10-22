@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const keepAlive = require('./server');
+const { getCommandFiles } = require('./utils/file');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -20,12 +21,16 @@ for (const file of eventFiles) {
 }
 
 client.commands = new Collection();
-
 const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const commandFiles = getCommandFiles(commandsPath);
 
-for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
+for (const { type, file } of commandFiles) {
+    let filePath = path.join(commandsPath, file);
+
+    if (type === 'game') {
+        filePath = path.join(commandsPath, 'game', file);
+    }
+
     const command = require(filePath);
 
     if ('data' in command && 'execute' in command) {

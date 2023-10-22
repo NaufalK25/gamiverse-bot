@@ -1,5 +1,5 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addField, addEmptyField } = require('../helpers');
+const { addEmptyField, addField } = require('../utils/embed');
 
 module.exports = {
     data: new SlashCommandBuilder().setName('help').setDescription('Get help for the bot'),
