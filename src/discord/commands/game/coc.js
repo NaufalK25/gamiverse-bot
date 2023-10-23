@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const { addEmptyField, addField, createErrorEmbed } = require('../../utils/embed');
-const { nodeFetch } = require('../../../utils/general');
+const cocScrap = require('../../../scrap/coc');
 
 const COC_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676100894/gamiverse/coc/coc_jhd8vb.png';
 const TOWN_HALL_IMAGES = {
@@ -62,43 +62,18 @@ module.exports = {
     async execute(interaction) {
         try {
             const argTag = interaction.options.getString('tag').trim().toUpperCase();
-            const player = await nodeFetch(`https://api.clashofclans.com/v1/players/%23${argTag}`, {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json',
-                    Authorization: `Bearer ${process.env.COC_TOKEN}`
-                }
-            });
+            const response = await cocScrap(`https://www.coc-stats.net/en/player/${argTag}/`);
 
-            if (player.reason === 'accessDenied') {
-                const embed = createErrorEmbed(COC_THUMBNAIL, `Sorry, this command is temporarily remove. Please check the documentation for more information`, 'Clash of Clans');
-                return await interaction.reply({ embeds: [embed] });
-            }
-
-            if (player.reason === 'notFound') {
+            if (!response.success && response.error === 'Player Not Found!') {
                 const embed = createErrorEmbed(
                     COC_THUMBNAIL,
-                    `Sorry, we couldn't find a player with the tag \`${argTag}\`. Please check that you have entered the correct tag and try again`,
+                    `Sorry, we couldn't find a player with the tag \`#${argTag}\`. Please check that you have entered the correct tag and try again`,
                     'Clash of Clans'
                 );
                 return await interaction.reply({ embeds: [embed] });
             }
 
-            if (player.reason === 'accessDenied.invalidIp') {
-                const notAllowedIP = player.message.split(' ').at(-1);
-                const embed = createErrorEmbed(
-                    COC_THUMBNAIL,
-                    `Sorry, the server IP address is not allowed: \`${notAllowedIP}\`. Please contact the developer to add this IP address to the list of allowed IP addresses.`,
-                    'Clash of Clans'
-                );
-                return await interaction.reply({ embeds: [embed] });
-            }
-
-            if (player.reason) {
-                const embed = createErrorEmbed(COC_THUMBNAIL, `${player.reason}: ${player.message}`, 'Clash of Clans');
-                return await interaction.reply({ embeds: [embed] });
-            }
-
+            const player = response.player;
             const embed = new EmbedBuilder()
                 .setColor('#FFF85C')
                 .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
@@ -107,11 +82,14 @@ module.exports = {
                     addField('Town Hall', player.townHallLevel, {
                         sticker: ':house_with_garden:'
                     }),
+                    addField('Builder Hall', player.builderHallLevel, {
+                        sticker: ':house_with_garden:'
+                    }),
                     addField('Clan', player.clan ? `${player.clan.name} ${player.clan.tag}` : 'None', {
                         sticker: ':shield:'
                     }),
                     addEmptyField(),
-                    addField('League', player.league ? player.league.name : 'None', {
+                    addField('League', player.league || 'None', {
                         sticker: ':trophy:'
                     }),
                     addField('Trophies', player.trophies, {
@@ -120,25 +98,38 @@ module.exports = {
                     addField('Best Trophies', player.bestTrophies, {
                         sticker: ':first_place:'
                     }),
+                    addEmptyField(),
+                    addField('Total Attack Wins', player.totalAttackWins, {
+                        sticker: ':crossed_swords:'
+                    }),
+                    addField('Total Defense Wins', player.totalDefenseWins, {
+                        sticker: ':shield:'
+                    }),
+                    addField('Total Donations', player.totalDonations, {
+                        sticker: ':gift:'
+                    }),
+                    addEmptyField(),
                     addField('War Stars', player.warStars, {
                         sticker: ':star:'
                     }),
+                    addField('War Preferences', player.warPreferences, {
+                        sticker: `:${player.warPreferences.toLowerCase() === 'in' ? 'white_check_mark' : 'negative_squared_cross_mark'}:`
+                    }),
                     addEmptyField(),
-                    addField('Total Attack Wins', player.achievements.find(achievement => achievement.name === 'Conqueror').value, {
+                    addField('Builder Base League', player.builderBaseLeague, {
+                        sticker: ':gear:'
+                    }),
+                    addField('Builder Battle Trophies', player.builderBattleTrophies, {
                         sticker: ':crossed_swords:'
                     }),
-                    addField('Total Defense Wins', player.achievements.find(achievement => achievement.name === 'Unbreakable').value, {
-                        sticker: ':shield:'
-                    }),
-                    addField('Total Donations', player.achievements.find(achievement => achievement.name === 'Friend in Need').value, {
-                        sticker: ':gift:'
+                    addField('Best Builder Battle Trophies', player.bestBuilderBattleTrophies, {
+                        sticker: ':first_place:'
                     })
                 )
                 .setImage(getTHImage(player.townHallLevel, player.townHallWeaponLevel ? player.townHallWeaponLevel : 0))
                 .setFooter({ text: 'Clash of Clans' });
 
-            await interaction.deferReply();
-            await interaction.editReply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed] });
         } catch (err) {
             const embed = createErrorEmbed(
                 COC_THUMBNAIL,

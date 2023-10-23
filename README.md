@@ -17,18 +17,18 @@ Gamiverse is a bot that can get player stats from various games and display them
 
 ### Game
 
-| Game             | Command                         | Type          | Status             |
-| ---------------- | ------------------------------- | ------------- | ------------------ |
-| Brawl Stars      | `/bs <tag>`                     | API           | Temporarily Remove |
-| Clash of Clans   | `/coc <tag>`                    | API           | Temporarily Remove |
-| Clash Royale     | `/cr <tag>`                     | API           | Temporarily Remove |
-| Chess.com        | `/chess <username>`             | API           | OK                 |
-| Destiny 2        | `/d2 <platform> <membershipId>` | API           | OK                 |
-| Fate/Grand Order | `/fgo <server> <userId>`        | Web Scrapping | OK                 |
-| PUBG             | `/pubg <platform> <accountId>`  | API           | OK                 |
-| TETR.io          | `/tetrio <username>`            | API           | OK                 |
+| Game             | Command                         | Type          | Discord | Telegram | Status             |
+| ---------------- | ------------------------------- | ------------- | :-----: | :------: | ------------------ |
+| Brawl Stars      | `/bs <tag>`                     | API           |  `Yes`  |  `Yes`   | Temporarily Remove |
+| Clash of Clans   | `/coc <tag>`                    | Web Scrapping |  `Yes`  |   `No`   | OK                 |
+| Clash Royale     | `/cr <tag>`                     | API           |  `Yes`  |  `Yes`   | Temporarily Remove |
+| Chess.com        | `/chess <username>`             | API           |  `Yes`  |  `Yes`   | OK                 |
+| Destiny 2        | `/d2 <platform> <membershipId>` | API           |  `Yes`  |  `Yes`   | OK                 |
+| Fate/Grand Order | `/fgo <server> <userId>`        | Web Scrapping |  `Yes`  |   `No`   | OK                 |
+| PUBG             | `/pubg <platform> <accountId>`  | API           |  `Yes`  |  `Yes`   | OK                 |
+| TETR.io          | `/tetrio <username>`            | API           |  `Yes`  |  `Yes`   | OK                 |
 
-> **Note:** Brawl Stars, Clash of Clans, and Clash Royale commands are temporarily removed due to how the API works. The API requires an IP address to be whitelisted before it can be used and when restarting the bot, the IP address changes so I have to manually delete the old API key and create a new one.
+> **Note:** Brawl Stars and Clash Royale commands are temporarily removed due to how the API works. The API requires an IP address to be whitelisted before it can be used and when restarting the bot, the IP address changes so I have to manually delete the old API key and create a new one.
 
 ## API
 
@@ -36,7 +36,6 @@ Gamiverse is a bot that can get player stats from various games and display them
 | -------------- | ---------------------------------------------------------------- | :---------: | :------: |
 | Brawl Stars    | https://developer.brawlstars.com/#/documentation                 |  `Bearer`   |   Yes    |
 | Clash of Clans | https://developer.clashofclans.com/#/documentation               |  `Bearer`   |   Yes    |
-| Clash Royale   | https://developer.clashroyale.com/#/documentation                |  `Bearer`   |   Yes    |
 | Chess.com      | https://www.chess.com/news/view/published-data-api               |   `None`    |   Yes    |
 | Destiny 2      | https://bungie-net.github.io/multi/                              | `x-api-key` |   Yes    |
 | PUBG           | https://documentation.playbattlegrounds.com/en/introduction.html |  `Bearer`   |   Yes    |
@@ -44,9 +43,10 @@ Gamiverse is a bot that can get player stats from various games and display them
 
 ## Web Scrapping
 
-| Game             | Website              | Official |
-| ---------------- | -------------------- | :------: |
-| Fate/Grand Order | https://rayshift.io/ |    No    |
+| Game             | Website                    | Official |
+| ---------------- | -------------------------- | :------: |
+| Clash of Clans   | https://www.coc-stats.net/ |    No    |
+| Fate/Grand Order | https://rayshift.io/       |    No    |
 
 > **Here is a warning**. When compared to using APIs for data retrieval, web scraping has several disadvantages:
 >

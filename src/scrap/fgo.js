@@ -26,17 +26,6 @@ module.exports = async url => {
             return {
                 success: false,
                 error: 'Master Not Found!'
-                // master: {
-                //     server: url.split('/')[3].toUpperCase(),
-                //     userId: url.split('/')[4],
-                //     name: 'No Master Name',
-                //     tagline: 'No Tagline',
-                //     lv: '0',
-                //     decks: {
-                //         'Main Deck': [],
-                //         'Event Deck': []
-                //     }
-                // }
             };
         }
 
