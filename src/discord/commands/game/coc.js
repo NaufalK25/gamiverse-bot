@@ -85,7 +85,7 @@ module.exports = {
                     addField('Builder Hall', player.builderHallLevel, {
                         sticker: ':house_with_garden:'
                     }),
-                    addField('Clan', player.clan ? `${player.clan.name} ${player.clan.tag}` : 'None', {
+                    addField('Clan', player.clan.name !== '' ? `${player.clan.name} ${player.clan.tag}` : 'None', {
                         sticker: ':shield:'
                     }),
                     addEmptyField(),
@@ -135,11 +135,8 @@ module.exports = {
                 COC_THUMBNAIL,
                 [
                     'This error can be caused by:',
-                    '1. API token expired',
-                    '2. Invalid API token',
-                    '3. Rate limit exceeded',
-                    '4. Internal server error',
-                    '5. Server is under maintenance',
+                    '1. Internal server error',
+                    '2. Server is under maintenance',
                     'Please contact the developer if the error persists.'
                 ].join('\n'),
                 'Clash of Clans'

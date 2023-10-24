@@ -21,31 +21,31 @@ Gamiverse is a bot that can get player stats from various games and display them
 | ---------------- | ------------------------------- | ------------- | :-----: | :------: | ------------------ |
 | Brawl Stars      | `/bs <tag>`                     | API           |  `Yes`  |  `Yes`   | Temporarily Remove |
 | Clash of Clans   | `/coc <tag>`                    | Web Scrapping |  `Yes`  |   `No`   | OK                 |
-| Clash Royale     | `/cr <tag>`                     | API           |  `Yes`  |  `Yes`   | Temporarily Remove |
+| Clash Royale     | `/cr <tag>`                     | Web Scrapping |  `Yes`  |   `No`   | OK                 |
 | Chess.com        | `/chess <username>`             | API           |  `Yes`  |  `Yes`   | OK                 |
 | Destiny 2        | `/d2 <platform> <membershipId>` | API           |  `Yes`  |  `Yes`   | OK                 |
 | Fate/Grand Order | `/fgo <server> <userId>`        | Web Scrapping |  `Yes`  |   `No`   | OK                 |
 | PUBG             | `/pubg <platform> <accountId>`  | API           |  `Yes`  |  `Yes`   | OK                 |
 | TETR.io          | `/tetrio <username>`            | API           |  `Yes`  |  `Yes`   | OK                 |
 
-> **Note:** Brawl Stars and Clash Royale commands are temporarily removed due to how the API works. The API requires an IP address to be whitelisted before it can be used and when restarting the bot, the IP address changes so I have to manually delete the old API key and create a new one.
+> **Note:** Brawl Stars commands are temporarily removed due to how the API works. The API requires an IP address to be whitelisted before it can be used and when restarting the bot, the IP address changes so I have to manually delete the old API key and create a new one.
 
 ## API
 
-| Game           | Documentation                                                    |    Auth     | Official |
-| -------------- | ---------------------------------------------------------------- | :---------: | :------: |
-| Brawl Stars    | https://developer.brawlstars.com/#/documentation                 |  `Bearer`   |   Yes    |
-| Clash of Clans | https://developer.clashofclans.com/#/documentation               |  `Bearer`   |   Yes    |
-| Chess.com      | https://www.chess.com/news/view/published-data-api               |   `None`    |   Yes    |
-| Destiny 2      | https://bungie-net.github.io/multi/                              | `x-api-key` |   Yes    |
-| PUBG           | https://documentation.playbattlegrounds.com/en/introduction.html |  `Bearer`   |   Yes    |
-| TETR.io        | https://tetr.io/about/api/                                       |   `None`    |   Yes    |
+| Game        | Documentation                                                    |    Auth     | Official |
+| ----------- | ---------------------------------------------------------------- | :---------: | :------: |
+| Brawl Stars | https://developer.brawlstars.com/#/documentation                 |  `Bearer`   |   Yes    |
+| Chess.com   | https://www.chess.com/news/view/published-data-api               |   `None`    |   Yes    |
+| Destiny 2   | https://bungie-net.github.io/multi/                              | `x-api-key` |   Yes    |
+| PUBG        | https://documentation.playbattlegrounds.com/en/introduction.html |  `Bearer`   |   Yes    |
+| TETR.io     | https://tetr.io/about/api/                                       |   `None`    |   Yes    |
 
 ## Web Scrapping
 
 | Game             | Website                    | Official |
 | ---------------- | -------------------------- | :------: |
 | Clash of Clans   | https://www.coc-stats.net/ |    No    |
+| Clash Royale     | https://royaleapi.com/     |    No    |
 | Fate/Grand Order | https://rayshift.io/       |    No    |
 
 > **Here is a warning**. When compared to using APIs for data retrieval, web scraping has several disadvantages:

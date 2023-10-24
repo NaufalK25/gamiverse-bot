@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const { addEmptyField, addField, createErrorEmbed } = require('../../utils/embed');
-const { nodeFetch } = require('../../../utils/general');
+const crScrap = require('../../../scrap/cr');
 
 const CR_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676111869/gamiverse/cr/cr_nltoty.png';
 const ARENA_IMAGES = {
@@ -86,6 +86,18 @@ const ARENA_IMAGES = {
         image: 'https://res.cloudinary.com/dko04cygp/image/upload/v1676113180/gamiverse/cr/arena/Dragon_Spa_l4hca5.png'
     },
     'Arena 20': {
+        name: 'Boot Camp',
+        image: ''
+    },
+    'Arena 21': {
+        name: 'Clash Fest',
+        image: ''
+    },
+    'Arena 22': {
+        name: 'PANCAKES!',
+        image: ''
+    },
+    'Arena 23': {
         name: 'Legendary Arena',
         image: 'https://res.cloudinary.com/dko04cygp/image/upload/v1676113180/gamiverse/cr/arena/Legendary_Arena_oenbzh.png'
     }
@@ -99,95 +111,85 @@ module.exports = {
     async execute(interaction) {
         try {
             const argTag = interaction.options.getString('tag').trim().toUpperCase();
-            const player = await nodeFetch(`https://api.clashroyale.com/v1/players/%23${argTag}`, {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json',
-                    Authorization: `Bearer ${process.env.CR_TOKEN}`
+            const response = await crScrap(`https://royaleapi.com/player/${argTag}/`);
+
+            if (!response.success) {
+                let embed = new EmbedBuilder();
+                const errorType = response.error;
+
+                if (errorType.includes('503')) {
+                    embed = createErrorEmbed(CR_THUMBNAIL, 'Clash Royale is under maintenance', 'Clash Royale');
                 }
-            });
 
-            if (player.reason === 'accessDenied') {
-                const embed = createErrorEmbed(CR_THUMBNAIL, `Sorry, this command is temporarily remove. Please check the documentation for more information`, 'Clash Royale');
+                if (errorType.includes('404')) {
+                    embed = createErrorEmbed(
+                        CR_THUMBNAIL,
+                        `Sorry, we couldn't find a player with the tag \`#${argTag}\`. Please check that you have entered the correct tag and try again`,
+                        'Clash Royale'
+                    );
+                }
+
                 return await interaction.reply({ embeds: [embed] });
             }
 
-            if (player.reason === 'notFound') {
-                const embed = createErrorEmbed(
-                    CR_THUMBNAIL,
-                    `Sorry, we couldn't find a player with the tag \`${argTag}\`. Please check that you have entered the correct tag and try again`,
-                    'Clash Royale'
-                );
-                return await interaction.reply({ embeds: [embed] });
-            }
-
-            if (player.reason === 'accessDenied.invalidIp') {
-                const notAllowedIP = player.message.split(' ').at(-1);
-                const embed = createErrorEmbed(
-                    CR_THUMBNAIL,
-                    `Sorry, the server IP address is not allowed: \`${notAllowedIP}\`. Please contact the developer to add this IP address to the list of allowed IP addresses.`,
-                    'Clash Royale'
-                );
-                return await interaction.reply({ embeds: [embed] });
-            }
-
-            if (player.reason) {
-                const embed = createErrorEmbed(CR_THUMBNAIL, `${player.reason}: ${player.message}`, 'Clash Royale');
-                return await interaction.reply({ embeds: [embed] });
-            }
-
+            const player = response.player;
             const embed = new EmbedBuilder()
                 .setColor('#54E2D6')
                 .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
                 .setThumbnail(CR_THUMBNAIL)
                 .addFields(
-                    addField('Arena', `${player.arena ? player.arena.name : 'Arena 0'} ${ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].name}`, {
+                    addField('Arena', `${player.arena ? `${player.arena.level} ${player.arena.name ? player.arena.name : ARENA_IMAGES[player.arena.level].name}` : 'Arena 0 Training Camp'}`, {
                         sticker: ':classical_building:'
                     }),
-                    addField('Clan', player.clan ? `${player.clan.name} ${player.clan.tag}` : 'None', {
+                    addField('Clan', player.clan && player.clan.name !== 'Not in Clan' ? `${player.clan.name} ${player.clan.tag}` : 'None', {
                         sticker: ':shield:'
                     }),
                     addEmptyField(),
+                    addField('Cards Found', player.cardsFound, {
+                        sticker: ':black_joker:'
+                    }),
                     addField('Total Donation', player.totalDonations, {
                         sticker: ':gift:'
                     }),
+                    addField('Joined Since', `${player.accountAge} ago`, {
+                        sticker: ':black_joker:'
+                    }),
+                    addEmptyField(),
                     addField('Trophies', player.trophies, {
                         sticker: ':trophy:'
                     }),
                     addField('Best Trophies', player.bestTrophies, {
                         sticker: ':trophy:'
                     }),
+                    addField('Path of Legends Trophies', player.pathOfLegendsTrophies, {
+                        sticker: ':medal:'
+                    }),
                     addEmptyField(),
-                    addField('Battle Count', player.battleCount, {
+                    addField('Battle Count', player.ladderChallenge.totalGamesPlayed, {
                         sticker: ':crossed_swords:'
                     }),
-                    addField('Wins', player.wins, {
+                    addField('1V1 Draws', player.ladderChallenge.oneVOneDraws, {
                         sticker: ':crossed_swords:'
                     }),
-                    addField('Losses', player.losses, {
+                    addField('Wins', player.ladderChallenge.wins.count, {
+                        sticker: ':crossed_swords:'
+                    }),
+                    addField('Losses', player.ladderChallenge.loses.count, {
                         sticker: ':x:'
                     }),
-                    addField('Three Crown Wins', player.threeCrownWins, {
+                    addField('Three Crown Wins', player.ladderChallenge.threeCrownWins, {
                         sticker: ':crown:'
                     })
                 )
-                .setImage(ARENA_IMAGES[player.arena ? player.arena.name : 'Tutorial'].image)
+                .setImage(player.arena.image)
                 .setFooter({ text: 'Clash Royale' });
 
-            await interaction.deferReply();
-            await interaction.editReply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed] });
         } catch (err) {
+            console.log(err);
             const embed = createErrorEmbed(
                 CR_THUMBNAIL,
-                [
-                    'This error can be caused by:',
-                    '1. API token expired',
-                    '2. Invalid API token',
-                    '3. Rate limit exceeded',
-                    '4. Internal server error',
-                    '5. Server is under maintenance',
-                    'Please contact the developer if the error persists.'
-                ].join('\n'),
+                ['This error can be caused by:', '1. Internal server error', '2. Server is under maintenance', 'Please contact the developer if the error persists.'].join('\n'),
                 'Clash Royale'
             );
 
