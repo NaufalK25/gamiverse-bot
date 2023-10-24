@@ -152,14 +152,14 @@ module.exports = {
                         sticker: ':gift:'
                     }),
                     addField('Joined Since', `${player.accountAge} ago`, {
-                        sticker: ':black_joker:'
+                        sticker: ':calendar:'
                     }),
                     addEmptyField(),
                     addField('Trophies', player.trophies, {
                         sticker: ':trophy:'
                     }),
                     addField('Best Trophies', player.bestTrophies, {
-                        sticker: ':trophy:'
+                        sticker: ':first_place:'
                     }),
                     addField('Path of Legends Trophies', player.pathOfLegendsTrophies, {
                         sticker: ':medal:'

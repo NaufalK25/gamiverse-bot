@@ -26,12 +26,12 @@ module.exports = async url => {
 
         const trophy = firstLeft.find('div.col-xs-6.service-in span.counter').text().trim();
         const thImage = firstLeft.find('div.col-xs-6.text-right.service-in img').attr('src');
-        const expLv = secondLeft.find('div.col-xs-6.text-right.service-in h4.counter').text().trim();
-        const bestTrophy = thirdLeft.find('h3 span').text().trim();
+        const expLevel = secondLeft.find('div.col-xs-6.text-right.service-in h4.counter').text().trim();
+        const bestTrophies = thirdLeft.find('h3 span').text().trim();
 
         const middleRightContainer = middleContainer.find('div.col-sm-6 div.service-block-v3.service-block-blue div.statistics');
-        const bbTrophy = middleRightContainer.find('small').text().split(' ').at(0);
-        const bestBBTrophy = middleRightContainer.find('h3 span').text();
+        const builderBattleTrophies = middleRightContainer.find('small').text().split(' ').at(0);
+        const bestBuilderBattleTrophies = middleRightContainer.find('h3 span').text();
 
         const bottomContainer = container.find('div.main-counters.margin-bottom-40');
         const statsFirstRow = bottomContainer.find('div:nth-child(2)');
@@ -41,10 +41,10 @@ module.exports = async url => {
 
         const warStars = statsFirstRow.find('div:nth-child(3) span').text();
         const warPreferences = statsFirstRow.find('div:last-child span').text();
-        const thLv = statsSecondRow.find('div:first-child span').text();
-        const thWeaponLv = statsSecondRow.find('div:nth-child(2) span').text();
-        const bhLv = statsSecondRow.find('div:last-child span').text();
-        const bbLeague = statsThirdRow.find('div:nth-child(3) span').text();
+        const townHallLevel = statsSecondRow.find('div:first-child span').text();
+        const townHallWeaponLevel = statsSecondRow.find('div:nth-child(2) span').text();
+        const builderHallLevel = statsSecondRow.find('div:last-child span').text();
+        const builderBaseLeague = statsThirdRow.find('div:nth-child(3) span').text();
         const league = statsFourthRow.find('div:first-child span a h4').text().trim();
         const tag = statsFourthRow.find('div:nth-child(2) span').text();
 
@@ -54,7 +54,7 @@ module.exports = async url => {
         const clanName = clanFirstRow.find('div:first-child span a').text();
         const clanLogo = clanFirstRow.find('div:last-child span img').attr('src');
         const clanTag = clanSecondRow.find('div:first-child span').text();
-        const clanLv = clanSecondRow.find('div:nth-child(2) span').text();
+        const clanLevel = clanSecondRow.find('div:nth-child(2) span').text();
         const clanCapitalContribution = clanSecondRow.find('div:nth-child(3) span').text();
         const clanRole = clanSecondRow.find('div:last-child span').text();
 
@@ -68,28 +68,28 @@ module.exports = async url => {
             player: {
                 name,
                 tag,
-                expLevel: +expLv,
-                townHallLevel: +thLv,
-                townHallWeaponLevel: +thWeaponLv,
-                builderHallLevel: +bhLv,
+                expLevel,
+                townHallLevel,
+                townHallWeaponLevel,
+                builderHallLevel,
                 league,
                 trophies: +trophy.replaceAll('.', ''),
-                bestTrophies: +bestTrophy,
-                builderBaseLeague: bbLeague,
-                builderBattleTrophies: +bbTrophy,
-                bestBuilderBattleTrophies: +bestBBTrophy,
-                warStars: +warStars,
+                bestTrophies,
+                builderBaseLeague,
+                builderBattleTrophies,
+                bestBuilderBattleTrophies,
+                warStars,
                 warPreferences,
-                totalAttackWins: +totalAttackWins,
-                totalDefenseWins: +totalDefenseWins,
-                totalDonations: +totalDonations,
+                totalAttackWins,
+                totalDefenseWins,
+                totalDonations,
                 clan: {
                     name: clanName,
                     tag: clanTag,
                     logo: clanLogo,
-                    level: +clanLv,
+                    level: clanLevel,
                     role: clanRole,
-                    clanCapitalContribution: +clanCapitalContribution
+                    clanCapitalContribution
                 },
                 thImage: `https://www.coc-stats.net${thImage}`
             }
