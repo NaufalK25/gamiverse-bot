@@ -127,7 +127,6 @@ module.exports = {
             await interaction.deferReply();
             return await sendEmbedWithPagination(interaction, embeds);
         } catch (err) {
-            console.log(err);
             const embed = createErrorEmbed(
                 FGO_THUMBNAIL,
                 ['This error can be caused by:', '1. Internal server error', '2. Server is under maintenance', 'Please contact the developer if the error persists.'].join('\n'),

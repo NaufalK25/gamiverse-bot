@@ -108,7 +108,6 @@ module.exports = async url => {
             }
         };
     } catch (err) {
-        console.log(err);
         return {
             success: false,
             error: 'Internal Server Error!'

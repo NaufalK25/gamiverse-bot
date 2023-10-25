@@ -1,4 +1,3 @@
-require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder, time, TimestampStyles } = require('discord.js');
 const { addEmptyField, addField, createErrorEmbed } = require('../../utils/embed');
 const { nodeFetch } = require('../../../utils/general');

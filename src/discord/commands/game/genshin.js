@@ -88,7 +88,6 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (err) {
-            console.log(err);
             const embed = createErrorEmbed(
                 GENSHIN_THUMBNAIL,
                 ['This error can be caused by:', '1. Internal server error', '2. Server is under maintenance', 'Please contact the developer if the error persists.'].join('\n'),
