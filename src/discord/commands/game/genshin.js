@@ -47,26 +47,41 @@ module.exports = {
             }
 
             const traveler = response.traveler;
+            const serverCode = +traveler.uid.split('')[0];
+            const fields = [
+                addField('Server', SERVER[serverCode], {
+                    sticker: `:earth_${serverCode === 6 ? 'americas' : serverCode === 7 ? 'africa' : 'asia'}:`
+                }),
+                addField('Avatar', traveler.avatar.character, {
+                    sticker: ':bust_in_silhouette:'
+                }),
+                addField('World Level', traveler.wl, {
+                    sticker: ':globe_with_meridians:'
+                }),
+                addField('Total Achievement', traveler.totalAchievments || 0, {
+                    sticker: ':trophy:'
+                }),
+                addField('Spiral Abyss', traveler.spiralAbyss || '?-?', {
+                    sticker: ':crossed_swords:'
+                })
+            ];
+
+            if (traveler.characterList.length > 0) {
+                fields.push(
+                    addEmptyField(),
+                    addTitleOnlyField('Character List'),
+                    ...traveler.characterList.map(character =>
+                        addField(character.name, `Lv. ${character.level}`, {
+                            sticker: ':arrow_double_up:'
+                        })
+                    )
+                );
+            }
 
             const embed = new EmbedBuilder()
                 .setColor('#FFFDF4')
-                .setTitle(`${SERVER[+traveler.uid.split('')[0]]} | ${traveler.name} | AR ${traveler.ar}`)
-                .addFields(
-                    addField('World Level', traveler.wl, {
-                        sticker: ':globe_with_meridians:'
-                    }),
-                    addField('Total Achievement', traveler.totalAchievments, {
-                        sticker: ':trophy:'
-                    }),
-                    addField('Spiral Abyss', traveler.spiralAbyss, {
-                        sticker: ':crossed_swords:'
-                    }),
-                    addEmptyField(),
-                    addTitleOnlyField('Character List'),
-                    ...traveler.characterList.map(character => addField(character.name, `Lv. ${character.level}`, {
-                        sticker: ':arrow_double_up:'
-                    }))
-                )
+                .setTitle(`${traveler.uid} | ${traveler.name} | AR ${traveler.ar}`)
+                .addFields(...fields)
                 .setThumbnail(GENSHIN_THUMBNAIL)
                 .setImage(traveler.avatar.image)
                 .setFooter({ text: 'Genshin Impact' });

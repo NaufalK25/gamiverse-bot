@@ -17,17 +17,17 @@ Gamiverse is a bot that can get player stats from various games and display them
 
 ### Game
 
-| Game             | Command                         | Type          | Discord | Telegram | Status             |
-| ---------------- | ------------------------------- | ------------- | :-----: | :------: | ------------------ |
-| Brawl Stars      | `/bs <tag>`                     | API           |  `Yes`  |  `Yes`   | Temporarily Remove |
-| Clash of Clans   | `/coc <tag>`                    | Web Scrapping |  `Yes`  |   `No`   | OK                 |
-| Clash Royale     | `/cr <tag>`                     | Web Scrapping |  `Yes`  |   `No`   | OK                 |
-| Chess.com        | `/chess <username>`             | API           |  `Yes`  |  `Yes`   | OK                 |
-| Destiny 2        | `/d2 <platform> <membershipId>` | API           |  `Yes`  |  `Yes`   | OK                 |
-| Fate/Grand Order | `/fgo <server> <userId>`        | Web Scrapping |  `Yes`  |   `No`   | OK                 |
-| Genshin Impact   | `/genshin <uid>                 | Web Scrapping |  `Yes`  |   `No`   | OK                 |
-| PUBG             | `/pubg <platform> <accountId>`  | API           |  `Yes`  |  `Yes`   | OK                 |
-| TETR.io          | `/tetrio <username>`            | API           |  `Yes`  |  `Yes`   | OK                 |
+| Game             | Command                         | Type         | Discord | Telegram | Status             |
+| ---------------- | ------------------------------- | ------------ | :-----: | :------: | ------------------ |
+| Brawl Stars      | `/bs <tag>`                     | API          |  `Yes`  |  `Yes`   | Temporarily Remove |
+| Clash of Clans   | `/coc <tag>`                    | Web Scraping |  `Yes`  |   `No`   | OK                 |
+| Clash Royale     | `/cr <tag>`                     | Web Scraping |  `Yes`  |   `No`   | OK                 |
+| Chess.com        | `/chess <username>`             | API          |  `Yes`  |  `Yes`   | OK                 |
+| Destiny 2        | `/d2 <platform> <membershipId>` | API          |  `Yes`  |  `Yes`   | OK                 |
+| Fate/Grand Order | `/fgo <server> <userId>`        | Web Scraping |  `Yes`  |   `No`   | OK                 |
+| Genshin Impact   | `/genshin <uid>`                | Web Scraping |  `Yes`  |   `No`   | OK                 |
+| PUBG             | `/pubg <platform> <accountId>`  | API          |  `Yes`  |  `Yes`   | OK                 |
+| TETR.io          | `/tetrio <username>`            | API          |  `Yes`  |  `Yes`   | OK                 |
 
 > **Note:** Brawl Stars commands are temporarily removed due to how the API works. The API requires an IP address to be whitelisted before it can be used and when restarting the bot, the IP address changes so I have to manually delete the old API key and create a new one.
 
