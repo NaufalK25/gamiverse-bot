@@ -117,7 +117,7 @@ module.exports = {
                 const errorType = response.error;
 
                 if (errorType.includes('503')) {
-                    embed = createErrorEmbed(CR_THUMBNAIL, 'Clash Royale is under maintenance', 'Clash Royale');
+                    embed = createErrorEmbed(CR_THUMBNAIL, 'Clash Royale is **under maintenance**', 'Clash Royale');
                 }
 
                 if (errorType.includes('404')) {

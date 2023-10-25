@@ -30,7 +30,7 @@ module.exports = {
                 if (errorType.includes('400')) {
                     embed = createErrorEmbed(
                         GENSHIN_THUMBNAIL,
-                        `You have entered the invalid UID\`${argUID}\`, the valid UID must consist of 9 digit number that start with 1, 2, 5, 6, 7, 8, or 9. Please check that you have entered the correct UID and try again`,
+                        `You have entered the invalid UID\`${argUID}\`, the valid UID must consist of **9** digit number that start with **1**, **2**, **5**, **6**, **7**, **8**, or **9**. Please check that you have entered the correct UID and try again`,
                         'Genshin Impact'
                     );
                 }
