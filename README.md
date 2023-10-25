@@ -25,6 +25,7 @@ Gamiverse is a bot that can get player stats from various games and display them
 | Chess.com        | `/chess <username>`             | API           |  `Yes`  |  `Yes`   | OK                 |
 | Destiny 2        | `/d2 <platform> <membershipId>` | API           |  `Yes`  |  `Yes`   | OK                 |
 | Fate/Grand Order | `/fgo <server> <userId>`        | Web Scrapping |  `Yes`  |   `No`   | OK                 |
+| Genshin Impact   | `/genshin <uid>                 | Web Scrapping |  `Yes`  |   `No`   | OK                 |
 | PUBG             | `/pubg <platform> <accountId>`  | API           |  `Yes`  |  `Yes`   | OK                 |
 | TETR.io          | `/tetrio <username>`            | API           |  `Yes`  |  `Yes`   | OK                 |
 
@@ -47,6 +48,7 @@ Gamiverse is a bot that can get player stats from various games and display them
 | Clash of Clans   | https://www.coc-stats.net/ |    No    |
 | Clash Royale     | https://royaleapi.com/     |    No    |
 | Fate/Grand Order | https://rayshift.io/       |    No    |
+| Genshin Impact   | https://enka.network/      |    No    |
 
 > **Here is a warning**. When compared to using APIs for data retrieval, web scraping has several disadvantages:
 >

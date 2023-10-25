@@ -83,7 +83,7 @@ const createFGOEmbed = (master, { title = '', data = {}, page = {} } = {}) => {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('fgo')
-        .setDescription('Get naster stats from Fate/Grand Order')
+        .setDescription('Get master stats from Fate/Grand Order')
         .addStringOption(option =>
             option
                 .setName('server')

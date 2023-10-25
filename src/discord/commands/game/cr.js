@@ -1,4 +1,3 @@
-require('dotenv').config();
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const { addEmptyField, addField, createErrorEmbed } = require('../../utils/embed');
 const crScrap = require('../../../scrap/cr');
