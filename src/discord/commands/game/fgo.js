@@ -68,7 +68,7 @@ const createServantEmbedField = (title, servant) => {
 
 const createFGOEmbed = (master, { title = '', data = {}, page = {} } = {}) => {
     let footerText = 'FGO';
-    const embed = new EmbedBuilder().setColor('#4A65BE').setTitle(`${master.server} | ${master.name} (Lv. ${master.lv}) | ${master.userId}`).setDescription(master.tagline).setThumbnail(FGO_THUMBNAIL);
+    const embed = new EmbedBuilder().setColor('#4A65BE').setTitle(`${master.server} | ${master.name} (Lv. ${master.lv}) | ${master.userId}`).setDescription(`*${master.tagline}*`).setThumbnail(FGO_THUMBNAIL);
 
     if (data && data.name) {
         const fields = createServantEmbedField(title, data);

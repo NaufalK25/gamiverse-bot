@@ -135,6 +135,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor('#54E2D6')
                 .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
+                .setURL(`https://royaleapi.com/player/${argTag}/`)
                 .setThumbnail(CR_THUMBNAIL)
                 .addFields(
                     addField('Arena', `${player.arena ? `${player.arena.level} ${player.arena.name ? player.arena.name : ARENA_IMAGES[player.arena.level].name}` : 'Arena 0 Training Camp'}`, {

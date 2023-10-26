@@ -81,6 +81,8 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor('#FFFDF4')
                 .setTitle(`${traveler.uid} | ${traveler.name} | AR ${traveler.ar}`)
+                .setDescription(`*${traveler.signature}*`)
+                .setURL(`https://enka.network/u/${traveler.uid}/`)
                 .addFields(...fields)
                 .setThumbnail(GENSHIN_THUMBNAIL)
                 .setImage(traveler.avatar.image)

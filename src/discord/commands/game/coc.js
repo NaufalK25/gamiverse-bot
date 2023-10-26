@@ -76,6 +76,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor('#FFF85C')
                 .setTitle(`${player.expLevel} | ${player.name} | ${player.tag}`)
+                .setURL(`https://www.coc-stats.net/en/player/${argTag}/`)
                 .setThumbnail(COC_THUMBNAIL)
                 .addFields(
                     addField('Town Hall', player.townHallLevel, {
