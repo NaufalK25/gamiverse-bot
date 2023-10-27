@@ -73,7 +73,7 @@ module.exports = async url => {
                 townHallWeaponLevel,
                 builderHallLevel,
                 league,
-                trophies: +trophy.replaceAll('.', ''),
+                trophies: trophy.replaceAll('.', ''),
                 bestTrophies,
                 builderBaseLeague,
                 builderBattleTrophies,

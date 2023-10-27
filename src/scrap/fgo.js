@@ -64,15 +64,15 @@ module.exports = async url => {
                 name: $(this).attr('title'),
                 classPosition: POSITION[idx % 9],
                 url: $(this).find('a').attr('href'),
-                lv: +lv,
-                hp: +hp,
-                atk: +atk,
+                lv,
+                hp,
+                atk,
                 skill: {
-                    first: +firstSkill,
-                    second: +secondSkill,
-                    third: +thirdSkill
+                    first: firstSkill,
+                    second: secondSkill,
+                    third: thirdSkill
                 },
-                np: +np
+                np
             });
         });
 
@@ -89,9 +89,9 @@ module.exports = async url => {
             decks[decksName[Math.floor(idx / 9)]][idx % 9].ce = {
                 name: $(this).attr('title'),
                 url: $(this).find('a').attr('href'),
-                lv: +lv,
-                hp: +hp,
-                atk: +atk,
+                lv,
+                hp,
+                atk,
                 mlb
             };
         });
