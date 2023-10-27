@@ -27,18 +27,18 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setColor('#779556')
-                .setTitle(player.username)
+                .setTitle(`${player.title ? `${player.title} ` : ''}${player.name ? player.name : player.url.split('/').at(-1)} (${player.username})${player.verified ? ' :white_check_mark:' : ''}`)
                 .setURL(player.url)
                 .setThumbnail(CHESS_THUMBNAIL)
                 .addFields(
-                    addField('Followers', player.followers, {
-                        sticker: ':busts_in_silhouette:'
-                    }),
                     addField('Country', country.name || 'None', {
                         sticker: `:flag_${country.code.toLowerCase()}:`
                     }),
+                    addField('Followers', player.followers, {
+                        sticker: ':busts_in_silhouette:'
+                    }),
                     addEmptyField(),
-                    addField('Status', player.status, {
+                    addField('Status', `${player.status[0].toUpperCase()}${player.status.substring(1)}`, {
                         sticker: ':star:'
                     }),
                     addField('League', player.league || 'None', {
@@ -55,6 +55,10 @@ module.exports = {
                     })
                 )
                 .setFooter({ text: 'Chess.com' });
+
+            if (player.avatar) {
+                embed.setImage(player.avatar);
+            }
 
             await interaction.deferReply();
             await interaction.editReply({ embeds: [embed] });

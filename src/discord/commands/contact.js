@@ -8,21 +8,21 @@ module.exports = {
             .setColor('#404EED')
             .setTitle('Contact Information')
             .addFields(
-                addField('Email', 'naufalkateni2001@gmail.com', {
-                    sticker: ':envelope:'
+                addField('GitHub', 'NaufalK25', {
+                    sticker: ':cat:'
                 }),
                 addField('Discord', 'NaufalK#3934', {
                     sticker: ':speech_balloon:'
                 }),
                 addField('Telegram', '@NaufalK25', {
                     sticker: ':speech_balloon:'
-                }),
-                addField('GitHub', 'NaufalK25', {
-                    sticker: ':cat:'
                 })
             )
             .setFooter({ text: 'Gamiverse Bot' });
 
-        return await interaction.reply({ embeds: [embed] });
+        return await interaction.reply({
+            embeds: [embed],
+            content: ['https://github.com/NaufalK25/gamiverse-bot', 'https://discordapp.com/users/619852756534034432', 'https://t.me/NaufalK25'].join('\n')
+        });
     }
 };

@@ -1,5 +1,5 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { addEmptyField, addField } = require('../utils/embed');
+const { addField, addTitleOnlyField } = require('../utils/embed');
 
 module.exports = {
     data: new SlashCommandBuilder().setName('help').setDescription('Get help for the bot'),
@@ -8,6 +8,7 @@ module.exports = {
             .setColor('#404EED')
             .setTitle('Help')
             .addFields(
+                addTitleOnlyField('General'),
                 addField('/help', 'Get help for the bot', {
                     sticker: ':grey_question:'
                 }),
@@ -17,7 +18,7 @@ module.exports = {
                 addField('/docs', 'Get documentation for the bot', {
                     sticker: ':books:'
                 }),
-                addEmptyField(),
+                addTitleOnlyField('Game'),
                 addField('/bs', 'Get player stats from Brawl Stars', {
                     sticker: ':gun:'
                 }),
@@ -32,6 +33,15 @@ module.exports = {
                 }),
                 addField('/d2', 'Get player stats from Destiny 2', {
                     sticker: ':shield:'
+                }),
+                addField('/fgo', 'Get player stats from Fate/Grand Order', {
+                    sticker: ':globe_with_meridians:'
+                }),
+                addField('/genshin', 'Get player stats from Genshin Impact', {
+                    sticker: ':mountain:'
+                }),
+                addField('/hsr', 'Get player stats from Honkai Star Rail', {
+                    sticker: ':milky_way:'
                 }),
                 addField('/pubg', 'Get player stats from PUBG', {
                     sticker: ':gun:'

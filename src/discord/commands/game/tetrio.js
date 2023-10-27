@@ -46,18 +46,21 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setColor('#7D5FAD')
-                .setTitle(playerStats.username)
+                .setTitle(`${playerStats.username}${playerStats.verified ? ' :white_check_mark:' : ''}${playerStats.supporter ? ' :star:' : ''}`)
                 .setURL(`https://ch.tetr.io/u/${playerStats.username}`)
                 .setThumbnail(TETRIO_THUMBNAIL)
                 .addFields(
                     addField('Country', playerStats.country || 'None', {
-                        sticker: `:flag_${playerStats.country.toLowerCase()}:`
+                        sticker: `:flag_${playerStats.country ? playerStats.country.toLowerCase() : 'white'}:`
                     }),
                     addField('Member Since', time(Math.round(new Date(playerStats.ts).getTime() / 1000), TimestampStyles.RelativeTime), {
                         highlight: false,
                         sticker: ':calendar:'
                     }),
                     addEmptyField(),
+                    addField('XP', playerStats.xp, {
+                        sticker: ':arrow_double_up:'
+                    }),
                     addField('Games Played', playerStats.league.gamesplayed, {
                         sticker: ':video_game:'
                     }),
@@ -82,6 +85,7 @@ module.exports = {
             await interaction.deferReply();
             await interaction.editReply({ embeds: [embed] });
         } catch (err) {
+            console.log(err);
             const embed = createErrorEmbed(
                 TETRIO_THUMBNAIL,
                 ['This error can be caused by:', '1. Rate limit exceeded', '2. Internal server error', '3. Server is under maintenance', 'Please contact the developer if the error persists.'].join(
