@@ -2,6 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 const getCharaName = rawCharaName => {
+    // rawCharaName -> https://github.com/EnkaNetwork/API-docs/blob/master/store/characters.json
     const CHARA_NAME = {
         // Traveler
         PlayerBoy: 'Aether',

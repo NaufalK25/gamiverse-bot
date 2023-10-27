@@ -26,6 +26,7 @@ Gamiverse is a bot that can get player stats from various games and display them
 | Destiny 2        | `/d2 <platform> <membershipId>` | API          |  `Yes`  |  `Yes`   | OK                 |
 | Fate/Grand Order | `/fgo <server> <userId>`        | Web Scraping |  `Yes`  |   `No`   | OK                 |
 | Genshin Impact   | `/genshin <uid>`                | Web Scraping |  `Yes`  |   `No`   | OK                 |
+| Honkai Star Rail | `/hsr <uid>`                    | Web Scraping |  `Yes`  |   `No`   | OK                 |
 | PUBG             | `/pubg <platform> <accountId>`  | API          |  `Yes`  |  `Yes`   | OK                 |
 | TETR.io          | `/tetrio <username>`            | API          |  `Yes`  |  `Yes`   | OK                 |
 
@@ -41,7 +42,7 @@ Gamiverse is a bot that can get player stats from various games and display them
 | PUBG        | https://documentation.playbattlegrounds.com/en/introduction.html |  `Bearer`   |   Yes    |
 | TETR.io     | https://tetr.io/about/api/                                       |   `None`    |   Yes    |
 
-## Web Scrapping
+## Web Scraping
 
 | Game             | Website                    | Official |
 | ---------------- | -------------------------- | :------: |
@@ -49,6 +50,7 @@ Gamiverse is a bot that can get player stats from various games and display them
 | Clash Royale     | https://royaleapi.com/     |    No    |
 | Fate/Grand Order | https://rayshift.io/       |    No    |
 | Genshin Impact   | https://enka.network/      |    No    |
+| Honkai Star Rail | https://enka.network/      |    No    |
 
 > **Here is a warning**. When compared to using APIs for data retrieval, web scraping has several disadvantages:
 >
