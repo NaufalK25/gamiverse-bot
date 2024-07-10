@@ -2,7 +2,7 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const { addEmptyField, addField, createErrorEmbed } = require('../../utils/embed');
 const cocScrap = require('../../../scrap/coc');
 
-const COC_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1676100894/gamiverse/coc/coc_jhd8vb.png';
+const COC_THUMBNAIL = 'https://res.cloudinary.com/dko04cygp/image/upload/v1720585846/gamiverse/coc/e0h3gafgbh0qf9weezus.png';
 const TOWN_HALL_IMAGES = {
     1: 'https://res.cloudinary.com/dko04cygp/image/upload/v1676036102/gamiverse/coc/town-hall/Town_Hall1_bmzjqn.png',
     2: 'https://res.cloudinary.com/dko04cygp/image/upload/v1676037146/gamiverse/coc/town-hall/Town_Hall2_hwokdx.png',

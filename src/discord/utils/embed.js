@@ -22,8 +22,12 @@ const addEmptyField = () => {
     return addTitleOnlyField('\u200B');
 };
 
-const addTitleOnlyField = title => {
-    return addField(title, '\u200B', { inline: false, highlight: false });
+const addEmptyInlineField = () => {
+    return addTitleOnlyField('\u200B', true);
+};
+
+const addTitleOnlyField = (title, inline = false) => {
+    return addField(title, '\u200B', { inline, highlight: false });
 };
 
 const createErrorEmbed = (thumbnail, desc, footerText) => {
@@ -74,6 +78,7 @@ const sendEmbedWithPagination = async (interaction, embeds) => {
 module.exports = {
     addField,
     addEmptyField,
+    addEmptyInlineField,
     addTitleOnlyField,
     createErrorEmbed,
     sendEmbedWithPagination

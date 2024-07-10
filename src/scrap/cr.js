@@ -37,9 +37,8 @@ module.exports = async url => {
         const arenaImage = headerContainer.children().first().find('img').attr('src');
         const playerName = topHeaderContainer.find('h1').text().trim();
         const playerTag = topHeaderContainer.find('h2').text();
-        const [trophy, bestTrophy, _] = leagueContainer.find('div:nth-child(2)').text().split(' ');
-        const arenaLevel = leagueContainer.find('div:nth-child(3)').text().trim();
-        const arenaName = leagueContainer.children().length > 3 ? leagueContainer.find('div').last().text().trim() : '';
+        const [trophy, bestTrophy] = leagueContainer.find('div:nth-child(2)').text().replace(/\s/g, '').split('/');
+        const arenaName = leagueContainer.find('div:nth-child(3)').text().trim();
         const pathOfLegendsTrophy = bottomHeaderContainer.children().length > 3 ? bottomHeaderContainer.find('div.league_info_container div').last().text().trim() : '0';
         const clanBadge = clanContainer.children().first().find('img').attr('src');
         const clanName = clanContainer.find('div.ui.header.item').text().trim();
@@ -136,15 +135,14 @@ module.exports = async url => {
                 name: playerName,
                 tag: playerTag,
                 expLevel,
-                trophies: trophy.trim(),
-                bestTrophies: bestTrophy.replace('/', '').trim(),
+                trophies: trophy,
+                bestTrophies: bestTrophy.replace('PB', ''),
                 pathOfLegendsTrophies: pathOfLegendsTrophy,
                 cardsFound: `${cardsFound}/${totalCardsFound}`,
                 totalDonations: totalDonations.replace(',', ''),
                 accountAge,
                 gamesPlayedPerDay,
                 arena: {
-                    level: arenaLevel,
                     name: arenaName,
                     image: arenaImage
                 },

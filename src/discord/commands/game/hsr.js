@@ -47,6 +47,7 @@ module.exports = {
             }
 
             const trailblazer = response.trailblazer;
+
             const serverCode = +trailblazer.uid.split('')[0];
             const fields = [
                 addField('Server', SERVER[serverCode], {

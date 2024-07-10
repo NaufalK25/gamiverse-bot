@@ -43,6 +43,9 @@ module.exports = {
                 addField('/hsr', 'Get player stats from Honkai Star Rail', {
                     sticker: ':milky_way:'
                 }),
+                addField('/osu', 'Get player stats from osu!', {
+                    sticker: ':musical_keyboard:'
+                }),
                 addField('/pubg', 'Get player stats from PUBG', {
                     sticker: ':gun:'
                 }),

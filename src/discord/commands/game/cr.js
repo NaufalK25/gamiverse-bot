@@ -138,7 +138,7 @@ module.exports = {
                 .setURL(`https://royaleapi.com/player/${argTag}/`)
                 .setThumbnail(CR_THUMBNAIL)
                 .addFields(
-                    addField('Arena', `${player.arena ? `${player.arena.level} ${player.arena.name ? player.arena.name : ARENA_IMAGES[player.arena.level].name}` : 'Arena 0 Training Camp'}`, {
+                    addField('Arena', `${player.arena ? `${player.arena.name ? player.arena.name : ARENA_IMAGES[player.arena.level].name}` : 'Training Camp'}`, {
                         sticker: ':classical_building:'
                     }),
                     addField('Clan', player.clan && player.clan.name !== 'Not in Clan' ? `${player.clan.name} ${player.clan.tag}` : 'None', {

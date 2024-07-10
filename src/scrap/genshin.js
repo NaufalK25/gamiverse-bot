@@ -27,10 +27,13 @@ const getCharaName = rawCharaName => {
 
         // Liyue
         Baizhuer: 'Baizu',
+        GanyuCostumeYu: 'Ganyu',
         Hutao: 'Hu Tao',
         KeqingCostumeFeather: 'Keqing',
+        Liuyun: 'Xianyun',
         NingguangCostumeFloral: 'Ningguang',
         Shougun: 'Raiden Shogun',
+        XinqiuCostumeBamboo: 'Xinqiu',
         Yae: 'Yae Miko',
         Yunjin: 'Yun Jin',
 
@@ -44,15 +47,17 @@ const getCharaName = rawCharaName => {
         Kokomi: 'Sangonomiya Kokomi',
         Momoka: 'Kirara',
         Sara: 'Kujou Sara',
+        ShenheCostumeDai: 'Shenhe',
         Shinobu: 'Kuki Shinobu',
         Tohma: 'Thoma',
+        Yae: 'Yae Miko',
 
         // Sumeru
         Alhatham: 'Alhaitham',
 
         // Fontaine
         Linette: 'Lynette',
-        Liney: 'Lyney'
+        Liney: 'Lyney',
     };
 
     return CHARA_NAME[rawCharaName] || rawCharaName;

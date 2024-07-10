@@ -27,6 +27,7 @@ Gamiverse is a bot that can get player stats from various games and display them
 | Fate/Grand Order | `/fgo <server> <userId>`        | Web Scraping |  `Yes`  |   `No`   | OK                 |
 | Genshin Impact   | `/genshin <uid>`                | Web Scraping |  `Yes`  |   `No`   | OK                 |
 | Honkai Star Rail | `/hsr <uid>`                    | Web Scraping |  `Yes`  |   `No`   | OK                 |
+| osu!             | `/osu <id>`                     | API          |  `Yes`  |   `No`   | OK                 |
 | PUBG             | `/pubg <platform> <accountId>`  | API          |  `Yes`  |  `Yes`   | OK                 |
 | TETR.io          | `/tetrio <username>`            | API          |  `Yes`  |  `Yes`   | OK                 |
 
@@ -39,6 +40,7 @@ Gamiverse is a bot that can get player stats from various games and display them
 | Brawl Stars | https://developer.brawlstars.com/#/documentation                 |  `Bearer`   |   Yes    |
 | Chess.com   | https://www.chess.com/news/view/published-data-api               |   `None`    |   Yes    |
 | Destiny 2   | https://bungie-net.github.io/multi/                              | `x-api-key` |   Yes    |
+| osu!        | https://osu.ppy.sh/docs/index.html                               |  `Bearer`   |   Yes    |
 | PUBG        | https://documentation.playbattlegrounds.com/en/introduction.html |  `Bearer`   |   Yes    |
 | TETR.io     | https://tetr.io/about/api/                                       |   `None`    |   Yes    |
 
