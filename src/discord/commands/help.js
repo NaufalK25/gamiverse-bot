@@ -29,7 +29,7 @@ module.exports = {
                     sticker: ':crossed_swords:'
                 }),
                 addField('/cr', 'Get player stats from Clash Royale', {
-                    sticker: ':crossed_swords:'
+                    sticker: ':crown:'
                 }),
                 addField('/d2', 'Get player stats from Destiny 2', {
                     sticker: ':shield:'
