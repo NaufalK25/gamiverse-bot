@@ -2,7 +2,7 @@ require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const keepAlive = require('./server');
+// const keepAlive = require('./server');
 const { getCommandFiles } = require('./utils/file');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -40,5 +40,5 @@ for (const { type, file } of commandFiles) {
     }
 }
 
-keepAlive();
+// keepAlive();
 client.login(process.env.DC_TOKEN);

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 
 const server = express();
@@ -7,7 +8,7 @@ server.all('/', (req, res) => {
 });
 
 function keepAlive() {
-    server.listen(3000, () => {
+    server.listen(process.env.PORT || 3000, () => {
         console.log('Server is ready.');
     });
 }
